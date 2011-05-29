@@ -97,100 +97,101 @@ h1 {clear:left}
 //INITIAL SETTINGS
 var debug = false;
 
-var versions = ["sakofdonuts", 6, 7, 7.1, 7.2];
+var versions = ["sakofdonuts", 6, 7, 7.1, 7.2, 7.3];
 
 var settings = {
 	"Stone & Ore": {
 		"dark":  6,
-		"light": 7.2,
+		"light": 7.3,
 		"coords": [[1,0], [0,2], [1,2], [2,2], [2,3], [3,3], [0,10]]},
 	"Cobble & Moss": {
 		"dark":   6,
 		"bricks": 7,
-		"light":  7.2,
+		"light":  7.3,
 		"coords": [[0,1],[4,2]]},
 	"Stone Slab": {
 		"cobble":   6,
 		"shaded":   7,
 		"unshaded": 7.2,
+		"rough": 7.3,
 		"coords": [[5,0],[6,0]]},
 	"Planks": {
 		"light": 6,
 		"mixed": 7,
-		"dark":  7.2,
+		"dark":  7.3,
 		"coords": [[4,0]]},
 	"Brickwall": {
 		"stone": 6,
 		"mortarless": 7,
-		"mortar": 7.2,
+		"mortar": 7.3,
 		"coords": [[7,0]]},
 	"Obsidian": {
 		"firey": 6,
-		"black": 7.2,
+		"black": 7.3,
 		"coords": [[5,2]]},
 	"Nether": {
 		"low contrast":  6,
-		"high contrast": 7.2,
+		"high contrast": 7.3,
 		"coords": [[7,6],[8,6]]},
 	"Wool": {
 		"rough":    6,
 		"stitched": 7.1,
-		"smooth":   7.2,
+		"smooth":   7.3,
 		"coords": [[0,4],
 			[1,7],[1,8],[1,9],[1,10],[1,11],[1,12],[1,13],[1,14],
 			[2,7],[2,8],[2,9],[2,10],[2,11],[2,12],[2,13]]},
 	"Wooden door": {
 		"fancy window": 6,
-		"plain window": 7.2,
+		"plain window": 7.3,
 		"coords": [[1,5],[1,6]]},
 	"Ladder": {
 		"bound":    7,
-		"nailed":   7.2,
+		"nailed":   7.3,
 		"nailed 2": "sakofdonuts",
 		"coords": [[3,5]]},
 	"Glass": {
 		"light frame": 6,
 		"heavy frame": 7,
 		"only frame":  7.1,
-		"grate":       7.2,
+		"grate":       7.3,
 		"mini frame":  "sakofdonuts",
 		"coords": [[1,3]]},
 	"Glowstone": {
 		"organic": 6,
 		"frame":   7,
 		"asian":   7.1,
-		"grate":   7.2,
+		"grate":   7.3,
 		"coords": [[9,6]]},
 	"Wheat": {
 		"chaotic": 6,
-		"upright": 7.2,
+		"upright": 7.3,
 		"coords": [[8,5],[9,5],[10,5],[11,5],[12,5],[13,5],[14,5],[15,5]]},
 	"Shrooms": {
-		"skinny": 7.2,
+		"skinny": 7.3,
 		"fat":    "sakofdonuts",
 		"coords": [[12,1],[13,1]]},
 	"Snowy grass": {
 		"iced":   6,
-		"topped": 7.2,
+		"topped": 7.3,
 		"coords": [[4,4]]},
 	"Pumpkin": {
 		"jack":  6,
 		"unlit": 7,
-		"lit":   7.2,
+		"lit":   7.3,
 		"creeper": "sakofdonuts",
 		"coords": [[6,6],[6,7],[7,7],[8,7]]},
 	"Torch": {
 		"slim":    6,
-		"guarded": 7.2,
+		"guarded": 7.3,
 		"coords": [[0,5]]},
 	//Doku doesn’t want these to be used, so I removed the settings.
 	//Left them in comments if somebody wants to use the coordinates.
 	/*"Bookshelf": {
-		"wimpy":      7.2,
+		"wimpy":      7.3,
 		"reinforced": "sakofdonuts",
 		"coords": [[3,2]]},
 	"Bed": {
-		"brown": 7.2,
+		"brown": 7.3,
 		"blue":  "sakofdonuts",
 		"coords": [[6,8],[7,8],[5,9],[6,9],[7,9],[8,9]]},*/
 	
@@ -198,7 +199,6 @@ var settings = {
 	"override": {
 		"pack": "sakofdonuts",
 		"coords": [
-			[3,0],       //sidegrass
 			[11,0],      //web
 			[3,8], [3,9] //repeater
 		]}
