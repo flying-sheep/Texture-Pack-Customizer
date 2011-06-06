@@ -97,7 +97,7 @@ h1 {clear:left}
 //INITIAL SETTINGS
 var debug = false;
 
-var versions = ["sakofdonuts", 6, 7, 7.1, 7.2, 7.3];
+var versions = ["sakofdonuts", 2, 3, 4.1, 5, 6, 7, 7.1, 7.2, 7.3];
 
 var settings = {
 	"Stone & Ore": {
@@ -110,6 +110,10 @@ var settings = {
 		"light":  7.2,
 		"round":  7.3,
 		"coords": [[0,1],[4,2]]},
+	"Sand": {
+		"swirly": 3,
+		"flat":   7.3,
+		"coords": [[2,1]]},
 	"Stone Slab": {
 		"cobble":   6,
 		"shaded":   7,
@@ -142,7 +146,12 @@ var settings = {
 		"coords": [[0,4],
 			[1,7],[1,8],[1,9],[1,10],[1,11],[1,12],[1,13],[1,14],
 			[2,7],[2,8],[2,9],[2,10],[2,11],[2,12],[2,13]]},
+	"Log": {
+		"round":    3,
+		"cornered": 7.3,
+		"coords": [[4,1],[5,1]]},
 	"Wooden door": {
+		"crude planks": 3,
 		"fancy window": 6,
 		"plain window": 7.3,
 		"coords": [[1,5],[1,6]]},
@@ -172,6 +181,10 @@ var settings = {
 		"skinny": 7.3,
 		"fat":    "sakofdonuts",
 		"coords": [[12,1],[13,1]]},
+	"Cactus": {
+		"smooth": 5,
+		"pointy": 7.3,
+		"coords": [[5,4],[6,4],[7,4]]},
 	"Snowy grass": {
 		"iced":   6,
 		"topped": 7.3,
@@ -186,6 +199,11 @@ var settings = {
 		"slim":    6,
 		"guarded": 7.3,
 		"coords": [[0,5]]},
+	"Break Animation": {
+		"curly":    3,
+		"bashed":   4.1,
+		"straight": 7.3,
+		"coords": [[0,15],[1,15],[2,15],[3,15],[4,15],[5,15],[6,15],[7,15],[8,15],[9,15]]},
 	//Doku doesn’t want these to be used, so I removed the settings.
 	//Left them in comments if somebody wants to use the coordinates.
 	/*"Bookshelf": {
@@ -401,6 +419,8 @@ function blockToggle(id) {
 	<button id="versions_button">Changelist</button>
 	<dl id="versions">
 		<h1>Changelist</h1>
+		<dt>1.2</dt><dd>Added everything from V2 up</dd>
+		<dt>1.1</dt><dd>Added 7.3</dd>
 		<dt>1.0</dt><dd>Removed Doku’s textures on request<br/>added changelist</dd>
 		<dt>0.6</dt><dd>Added „Create your own“ instructions</dd>
 		<dt>0.5</dt><dd>Added usage instructions<br/>restyle</dd>
