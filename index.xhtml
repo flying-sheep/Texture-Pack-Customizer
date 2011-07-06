@@ -15,59 +15,78 @@
 
 <title>JohnSmith Customizer</title>
 <style type="text/css">
-
-body {
+html, body {
+	margin:      0;
+	padding:     0;
+	height:      100%;
 	font-family: sans-serif;
-	margin: 0;
-	padding: 1em;
 }
+
+article {
+	display:   block;
+	position:  relative;
+	min-height:100%;
+}
+
 em em,
 dt {font-weight: bold}
-code > pre {outline: 1px dashed white}
-
-#stage {
-	padding: .5em;
-	border: 1em solid black;
-	margin-bottom: 3.2em;
+code > pre {
+	outline:  1px dashed white;
+	overflow: auto;
 }
 
-#stage,
-body > aside,
-form,
+form {
+	min-width:      512px;
+	padding:        16px;
+	/*this actually makes it adapt to it’s floating content’s size*/
+	overflow:       hidden;
+	padding-bottom: 3em;
+}
+canvas {
+	cursor:        pointer;
+	margin-bottom: 16px;
+}
+form > div {width: 256px}
+form > div,
 canvas {float:left}
+label,
+select {width: 128px}
+label {
+	display:    inline-block;
+	text-align: right;
+}
+select {color: buttontext}
 
-body > aside,
+header,
 footer {
-	display: block;
-	background-color:black;
-	color: white;
-	padding: 1ex 1%;
+	display:          block;
+	background-color: black;
+	color:            white;
+	padding:          1ex 1%;
 }
 
-body > aside {max-width: 450px}
+header {
+	-webkit-column-width: 393px;
+	   -moz-column-width: 393px;
+	     -o-column-width: 393px;
+	        column-width: 393px;
+}
 
 footer > aside {float:right}
 
 footer {
-	position:fixed;
-	bottom: 0;
-	left: 0;
-	width: 98%;
-	position: fixed;
+	width:    98%;
+	position: absolute;
+	bottom:   0;
 }
 footer a:link,
-footer a:visited {color: #0cf; text-decoration: none}
+footer a:visited,
 footer a:link:hover,
-footer a:visited:hover {color: #0cf; text-decoration: underline}
-
-form,
-canvas {margin: .5em}
-canvas {cursor: pointer}
-form   {display: table}
-label,
-select {display: table-cell}
-label  {text-align: right}
-select {color: buttontext}
+footer a:visited:hover {color: #0cf}
+footer a:link,
+footer a:visited {text-decoration: none}
+footer a:link:hover,
+footer a:visited:hover {text-decoration: underline}
 
 #guide {display:none; margin-bottom:3em}
 
@@ -296,7 +315,7 @@ function init() {
 		
 		setting = settings[settingName];
 		
-		var tr = document.createElement("tr");
+		var tr = document.createElement("div");
 		var label = document.createElement("label");
 		label.textContent = settingName;
 		var select = document.createElement("select");
@@ -391,10 +410,10 @@ function blockToggle(id) {
 
 
 </head>
-<body>
+<body><article>
 
 
-<aside>
+<header>
 	<h1>Usage:</h1>
 	<ol>
 		<li>Select options on the right</li>
@@ -441,17 +460,17 @@ function blockToggle(id) {
 			<li>Finally don’t forget to replace the title of the HTML page!</li>
 		</ol>
 	</div>
-</aside>
+</header>
 
-<div id="stage">
+<form id="settings">
 	<canvas id="terrain"/>
-	<form id="settings"/>
-</div>
+</form>
 
 <div id="versions_container">
 	<button id="versions_button">Changelist</button>
 	<dl id="versions">
 		<h1>Changelist</h1>
+		<dt>1.4</dt><dd>Redid Layout</dd>
 		<dt>1.3a</dt><dd>Fixed TNT missing</dd>
 		<dt>1.3</dt><dd>Added 7.4</dd>
 		<dt>1.2a</dt><dd>Added 7.3a</dd>
@@ -469,6 +488,5 @@ function blockToggle(id) {
 	<aside>Textures by JohnSmith, tweaks by aSakofDonuts.</aside>
 </footer>
 
-
-</body>
+</article></body>
 </html>
