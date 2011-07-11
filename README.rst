@@ -18,3 +18,12 @@ Additional stuff
 License
 =======
 This is released under the GPLv2
+
+====
+TODO
+====
+*	Make cursors all pointers
+*	Disable right click for non-Firefox-Browsers
+*	Make changelist `overflow: auto`
+*	“Loading” message
+*	Content area background color is different in browsers
