@@ -323,6 +323,7 @@ function init() {
 		label.textContent = settingName;
 		var select = document.createElement("select");
 		select.name = settingName;
+		select.keys = [37,38,39,40]; //arrowkeys
 		
 		for (var optionName in setting) {
 			if (optionName == "coords") break;
@@ -332,12 +333,20 @@ function init() {
 			option.selected = setting[optionName] == lastVersion;
 			
 			select.appendChild(option);
+			select.keys.push(optionName.toUpperCase().charCodeAt(0));
+			select.keys.push(optionName.toLowerCase().charCodeAt(0));
 		}
 		
-		select.addEventListener("change", function(aEvt) {
+		function selected(aEvt) {
 			var sel  = aEvt.target;
 			var opt  = sel.options[sel.selectedIndex].textContent;
 			swap(sel.name, opt);
+		}
+		select.addEventListener("change", selected, false);
+		select.addEventListener("keyup", function(aEvt) {
+			if (aEvt.target.keys.indexOf(aEvt.keyCode) != -1) {
+				selected(aEvt);
+			}
 		}, false);
 		
 		form.appendChild(tr);
