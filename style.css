@@ -80,11 +80,14 @@ footer a:visited:hover {text-decoration: underline}
 	position: fixed;
 	top: 0;
 	right: 0;
-	background-color: rgba(255,255,255,.6);
+	background-color: rgba(255,255,255,.75);
 	border: solid rgba(0,0,0,.6);
 	border-width: 0 0 1px 1px;
 	border-radius: 1em;
 	border-top-right-radius: 0;
+	max-width: 400px;
+	max-height: 95%;
+	overflow: auto;
 	padding: 1ex;
 }
 #versions_button {opacity: .6}

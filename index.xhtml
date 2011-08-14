@@ -17,6 +17,8 @@
 <link rel="stylesheet" href="style.css"/>
 <script type="text/javascript" src="lib/bas64.js"/>
 <script type="text/javascript" src="lib/canvas2image.js"/>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"/>
+<script type="text/javascript" src="lib/jcanvas.js"/>
 <script type="text/javascript" src="terrain.js"/>
 <script type="text/javascript">
 /* <![CDATA[ */
@@ -25,58 +27,47 @@ var debug = false;
 
 //INITIALIZATION
 var lastVersion = versions[versions.length-1];
-var vs = {};
-var loaded = versions.length;
-for (var i=0; i<versions.length; i++) {
-	var img = new Image;
-	img.src = "terrain.png/"+versions[i]+".png";
-	vs[versions[i]] = img;
-	img.addEventListener("load", function() {
-		loaded--;
-		if (loaded==0) {
-			if (document.readyState != "loading") init();
-			else document.addEventListener("DOMContentLoaded", init, false);
-		};
-	}, false);
-}
 
 //FINISH INITIALISATION
-function init() {
-	var canvas = document.getElementById("terrain");
-	canvas.width  = vs[lastVersion].width;
-	canvas.height = vs[lastVersion].height;
+$(document).ready(function() {
+	var canvas = $("#terrain")
+		.attr("width",  512)
+		.attr("height", 512) //TODO
+		.click(saveCanvas)
+		.bind("contextmenu", saveCanvas)
+	;
 	
-	var ctx = canvas.getContext("2d");
-	ctx.drawImage(vs[lastVersion],0,0);
+	canvas.drawImage({source: imgPath(lastVersion)});
 	if ("override" in settings)
 		swap("override", "pack");
 	
-	canvas.addEventListener("click", function() {Canvas2Image.saveAsPNG(canvas)}, false);
 	
-	var form = document.getElementById("settings");
+	var form = $("#settings");
 	
 	for (var settingName in settings) {
 		if (settingName == "override") break;
 		
 		setting = settings[settingName];
 		
-		var tr = document.createElement("div");
-		var label = document.createElement("label");
-		label.textContent = settingName;
-		var select = document.createElement("select");
-		select.name = settingName;
-		select.keys = [37,38,39,40]; //arrowkeys
+		var select =
+			$("<select/>", {"name": settingName})
+				.appendTo(
+					$("<div/>")
+						.append(
+							$("<label/>")
+								.text(settingName)
+						)
+						.appendTo(form)
+				)
+		;
 		
 		for (var optionName in setting) {
 			if (optionName == "coords") break;
 			
-			var option = document.createElement("option");
-			option.textContent = optionName;
-			option.selected = setting[optionName] == lastVersion;
-			
-			select.appendChild(option);
-			select.keys.push(optionName.toUpperCase().charCodeAt(0));
-			select.keys.push(optionName.toLowerCase().charCodeAt(0));
+			var option = $("<option/>")
+				.text(optionName)
+				.attr("selected", setting[optionName] == lastVersion)
+				.appendTo(select);
 		}
 		
 		function selected(aEvt) {
@@ -84,79 +75,95 @@ function init() {
 			var opt  = sel.options[sel.selectedIndex].textContent;
 			swap(sel.name, opt);
 		}
-		select.addEventListener("change", selected, false);
-		select.addEventListener("keyup", function(aEvt) {
-			if (aEvt.target.keys.indexOf(aEvt.keyCode) != -1) {
-				selected(aEvt);
-			}
-		}, false);
-		
-		form.appendChild(tr);
-		tr.appendChild(label);
-		tr.appendChild(select);
+		select.change(selected);
+		select.keyup(selected);
 	}
 	
 	blockToggle("guide");
 	blockToggle("versions");
 	
-	if (debug) for (var v in vs) {
-		var h = document.createElement("h1");
-		h.textContent = "terrain.png v"+v;
-		document.body.appendChild(h);
-		document.body.appendChild(vs[v]);
+	if (debug) for (var v in versions) {
+		$("body")
+			.append(
+				$("<h1/>")
+					.text("terrain.png version: "+v)
+			)
+			.append(
+				$("<img/>")
+					.attr("src", imgPath(versions[v]))
+			)
+		;
 	}
-}
+});
 
 //HELPER FUNCTIONS
+function saveCanvas() {Canvas2Image.saveAsPNG($("#terrain")[0])}
+function imgPath(name) {return "terrain.png/"+name+".png"}
+
 function swap(settingName, optionName) {
 	if (debug) console.log("Set", settingName, "to", optionName);
 	
 	var setting = settings[settingName];
 	
-	var img = vs[setting[optionName]];
+	var img = imgPath(setting[optionName]);
 	var coords = setting.coords;
 	
 	if (debug) console.log("Use", img, "for tiles", coords);
 	
-	var canvas = document.getElementById("terrain");
-	var ctx = canvas.getContext("2d");
+	var canvas = $("#terrain");
 	
-	if (debug) console.log(canvas, ctx);
+	var u = canvas.width()/16;
 	
-	var u = canvas.width/16;
-	
-	for (var c=0; c<coords.length; c++) {
-		var x = coords[c][0] * u;
-		var y = coords[c][1] * u;
+	coords.forEach(function(coord) {
+		var x = coord[0] * u + u/2;
+		var y = coord[1] * u + u/2;
 		
-		ctx.clearRect(x,y,u,u);
-		ctx.drawImage(img,x,y,u,u,x,y,u,u);
-	}
+		canvas
+			.clearCanvas({
+				x:x,     y:y,
+				width:u, height:u
+			})
+			.drawImage({
+				source: img,
+				sourceX:x,     sourceY:y,
+				sourceWidth:u, sourceHeight:u,
+				x:x,     y:y,
+				width:u, height:u
+			})
+		;
+	});
 }
 
 function blockToggle(id) {
-	var inButton = document.getElementById(id+"_button");
-	var content  = document.getElementById(id);
+	var inButton = $("#"+id+"_button");
+	var content  = $("#"+id);
 	
-	var outButton = inButton.previousSibling;
-	if (!(outButton.tagName == "button")) {
-		outButton = document.createElement("button");
-		outButton.textContent = "×";
-		outButton.setAttribute("style", "display: none; float: right");
-		inButton.parentNode.insertBefore(outButton, inButton);
+	var outButton = inButton.prev("button");
+	
+	if (outButton.length == 0) {
+		outButton =
+			$("<button/>")
+				.text("×")
+				.css({
+					"display": "none",
+					"float": "right"
+				})
+				.insertBefore(inButton)
+		;
 	}
 	
-	inButton.addEventListener("click", function () {
-		inButton .style.display = "none";
-		outButton.style.display = "block";
-		content.style.display   = "block";
-	}, false);
-	
-	outButton.addEventListener("click", function () {
-		outButton.style.display = "none";
-		inButton .style.display = "block";
-		content.style.display   = "none";
-	}, false);
+	inButton.click(function() {
+		inButton.toggle();
+		content.fadeToggle("fast", function() {
+			outButton.slideToggle("fast");
+		});
+	});
+	outButton.click(function() {
+		outButton.toggle();
+		content.fadeToggle("fast", function() {
+			inButton.slideToggle("fast");
+		});
+	});
 }
 
 /* ]]> */
@@ -224,6 +231,7 @@ function blockToggle(id) {
 	<button id="versions_button">Changelist</button>
 	<dl id="versions">
 		<h1>Changelist</h1>
+		<dt>1.5</dt><dd>Internal changes thanks to Kurtextrem and aSakofDonuts</dd>
 		<dt>1.4a</dt><dd>Readded SakOfDonuts’ glass &amp; glowstone<br/>Fixed TNT</dd>
 		<dt>1.4</dt><dd>Redid Layout</dd>
 		<dt>1.3a</dt><dd>Fixed TNT missing</dd>
