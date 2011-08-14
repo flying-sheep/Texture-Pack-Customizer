@@ -14,9 +14,11 @@ article {
 
 em em,
 dt {font-weight: bold}
-code > pre {
-	outline:  1px dashed white;
-	overflow: auto;
+pre > code {
+	display:        block;
+	outline:        1px dashed white;
+	outline-offset: 1ex;
+	overflow:       auto;
 }
 
 form {
