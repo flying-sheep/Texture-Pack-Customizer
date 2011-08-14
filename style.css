@@ -1,0 +1,92 @@
+
+html, body {
+	margin:      0;
+	padding:     0;
+	height:      100%;
+	font-family: sans-serif;
+}
+
+article {
+	display:   block;
+	position:  relative;
+	min-height:100%;
+}
+
+em em,
+dt {font-weight: bold}
+code > pre {
+	outline:  1px dashed white;
+	overflow: auto;
+}
+
+form {
+	min-width:      512px;
+	padding:        16px;
+	/*this actually makes it adapt to it’s floating content’s size*/
+	overflow:       hidden;
+	padding-bottom: 3em;
+}
+canvas {
+	cursor:        pointer;
+	margin-bottom: 16px;
+}
+form > div {width: 256px}
+form > div,
+canvas {float:left}
+label,
+select {width: 128px}
+label {
+	display:    inline-block;
+	text-align: right;
+}
+select {color: buttontext}
+
+header,
+footer {
+	display:          block;
+	background-color: black;
+	color:            white;
+	padding:          1ex 1%;
+}
+
+header {
+	-webkit-column-width: 393px;
+	   -moz-column-width: 393px;
+	     -o-column-width: 393px;
+	        column-width: 393px;
+}
+
+footer > aside {float:right}
+
+footer {
+	width:    98%;
+	position: absolute;
+	bottom:   0;
+}
+footer a:link,
+footer a:visited,
+footer a:link:hover,
+footer a:visited:hover {color: #0cf}
+footer a:link,
+footer a:visited {text-decoration: none}
+footer a:link:hover,
+footer a:visited:hover {text-decoration: underline}
+
+#guide {display:none; margin-bottom:3em}
+
+#versions_container {
+	position: fixed;
+	top: 0;
+	right: 0;
+	background-color: rgba(255,255,255,.6);
+	border: solid rgba(0,0,0,.6);
+	border-width: 0 0 1px 1px;
+	border-radius: 1em;
+	border-top-right-radius: 0;
+	padding: 1ex;
+}
+#versions_button {opacity: .6}
+#versions        {display: none}
+
+/* debug */
+h1 {clear:left}
