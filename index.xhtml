@@ -12,9 +12,94 @@
 -->
 
 <head>
+	<title>JohnSmith Customizer</title>
+	<link rel="stylesheet" href="style.css"/>
+</head>
 
-<title>JohnSmith Customizer</title>
-<link rel="stylesheet" href="style.css"/>
+
+<body>
+<article>
+
+<header>
+	<h1>Usage:</h1>
+	<ol>
+		<li>Select options on the right</li>
+		<li>See what they do on the left</li>
+		<li>Click on the image to save<br/>(Firefox users can use the Context Menu)</li>
+		<li>Save as (or rename to) <code>terrain.png</code></li>
+		<li>Replace <code>terrain.png</code> in <code>johnsmith_v7.2.zip</code></li>
+	</ol>
+	<h2>Extension</h2>
+	<p>Made a texture pack?<br/>Want a customizer for one?</p>
+	<button id="guide_button">Make your own customizer</button>
+	<div id="guide">
+		<h1>How to extend the Customizer</h1>
+		This tool basically consists of three parts:
+		<ol>
+			<li>This XHTML5 page (press <code>Ctrl+S</code> to save it to your PC)</li>
+			<li>A directory named <a href="terrain.png">terrain.png</a>, which contains the texture sheets<br/>(Yes, it is ends with .png, but is a directory)</li>
+			<li>A big JSON tree, containing the preferences and their options</li>
+		</ol>
+		If you want to replace the whole texture pack and rewrite the options, you have to do the following:
+		<ol>
+			<li>Replace the contents of the <code>terrain.png</code>-directory with the alternative terrain.pngs you want to use. Rename them sensibly in the process, e.g. “v4.0.png” and “tweaks.png”.</li>
+			<li>Replace the list of versions in the JavaScript with yours – minus the <code>.png</code> – e.g. <code>var versions = ["v4.0", "tweaks"];</code>. The last version in the list is initially drawn and it’s options selected.<br/><em>Note that if you use plain numbers truncateable to integers, like <code>4.0</code>, JavaScript <em>will</em> truncate them (in our example to <code>4</code>). Use Strings (<code>"4.0"</code>), or already truncated numbers (<code>4</code>) in this case.</em></li>
+			<li>
+				Now recreate the settings. <code>var settings</code> is assigned to a JSON tree with the following structure:
+				<dl>
+					<dt>1. Level: <em>settings</em></dt><dd>
+						<p>Each setting appears under the name it was assigned to</p>
+						<p>There is a special (optional!) setting called <code>override</code> with the single option <code>pack</code>, which is used to override certain parts of the initially drawn texture.</p></dd>
+					<dt>2. Level: <em>options</em></dt><dd>
+						<p>Each of these refers to one of the versions registered via the <code>versions</code> list.</p>
+						<p>A special option called <code>coords</code> instead contains a list of texture coordinates.</p></dd>
+					<dt>3. Level (inside each <code>coords</code> option): coordinates</dt><dd>
+						Coordinates are in the form <code>[x,y]</code>, so e.g. <code>[0,15]</code> refers to the texture on the bottom of the first column (start of break animation).</dd>
+				</dl>
+				An small example for a settings variable would be:<pre><code>var settings = {
+	"Pumpkin": {
+		"Faceless":     6,
+		"Creeper face": 7,
+		"coords": [[6,6],[6,7],[7,7],[8,7]]
+	}
+};</code></pre>
+			</li>
+			<li>Finally don’t forget to replace the title of the HTML page!</li>
+		</ol>
+	</div>
+</header>
+
+<form id="settings">
+	<canvas id="terrain"/>
+</form>
+
+<div id="versions_container">
+	<button id="versions_button">Changelist</button>
+	<dl id="versions">
+		<h1>Changelist</h1>
+		<dt>1.5</dt><dd>Internal changes thanks to Kurtextrem and aSakofDonuts</dd>
+		<dt>1.4a</dt><dd>Readded SakOfDonuts’ glass &amp; glowstone<br/>Fixed TNT</dd>
+		<dt>1.4</dt><dd>Redid Layout</dd>
+		<dt>1.3a</dt><dd>Fixed TNT missing</dd>
+		<dt>1.3</dt><dd>Added 7.4</dd>
+		<dt>1.2a</dt><dd>Added 7.3a</dd>
+		<dt>1.2</dt><dd>Added everything from V2 up</dd>
+		<dt>1.1</dt><dd>Added 7.3</dd>
+		<dt>1.0</dt><dd>Removed Doku’s textures on request<br/>Added changelist</dd>
+		<dt>0.6</dt><dd>Added „Create your own“ instructions</dd>
+		<dt>0.5</dt><dd>Added usage instructions<br/>restyle</dd>
+		<dt>0.1</dt><dd>Basic functional version</dd>
+	</dl>
+</div>
+
+<footer>
+	This Tool is made by <a href="http://red-sheep.de">flying sheep</a> and licensed under the GPLv2.
+	<aside>Textures by JohnSmith, tweaks by aSakofDonuts.</aside>
+</footer>
+
+</article>
+
+
 <script type="text/javascript" src="lib/base64.js"/>
 <script type="text/javascript" src="lib/canvas2image.js"/>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"/>
@@ -170,86 +255,5 @@ function blockToggle(id) {
 </script>
 
 
-</head>
-<body><article>
-
-
-<header>
-	<h1>Usage:</h1>
-	<ol>
-		<li>Select options on the right</li>
-		<li>See what they do on the left</li>
-		<li>Click on the image to save<br/>(Firefox users can use the Context Menu)</li>
-		<li>Save as (or rename to) <code>terrain.png</code></li>
-		<li>Replace <code>terrain.png</code> in <code>johnsmith_v7.2.zip</code></li>
-	</ol>
-	<h2>Extension</h2>
-	<p>Made a texture pack?<br/>Want a customizer for one?</p>
-	<button id="guide_button">Make your own customizer</button>
-	<div id="guide">
-		<h1>How to extend the Customizer</h1>
-		This tool basically consists of three parts:
-		<ol>
-			<li>This XHTML5 page (press <code>Ctrl+S</code> to save it to your PC)</li>
-			<li>A directory named <a href="terrain.png">terrain.png</a>, which contains the texture sheets<br/>(Yes, it is ends with .png, but is a directory)</li>
-			<li>A big JSON tree, containing the preferences and their options</li>
-		</ol>
-		If you want to replace the whole texture pack and rewrite the options, you have to do the following:
-		<ol>
-			<li>Replace the contents of the <code>terrain.png</code>-directory with the alternative terrain.pngs you want to use. Rename them sensibly in the process, e.g. “v4.0.png” and “tweaks.png”.</li>
-			<li>Replace the list of versions in the JavaScript with yours – minus the <code>.png</code> – e.g. <code>var versions = ["v4.0", "tweaks"];</code>. The last version in the list is initially drawn and it’s options selected.<br/><em>Note that if you use plain numbers truncateable to integers, like <code>4.0</code>, JavaScript <em>will</em> truncate them (in our example to <code>4</code>). Use Strings (<code>"4.0"</code>), or already truncated numbers (<code>4</code>) in this case.</em></li>
-			<li>
-				Now recreate the settings. <code>var settings</code> is assigned to a JSON tree with the following structure:
-				<dl>
-					<dt>1. Level: <em>settings</em></dt><dd>
-						<p>Each setting appears under the name it was assigned to</p>
-						<p>There is a special (optional!) setting called <code>override</code> with the single option <code>pack</code>, which is used to override certain parts of the initially drawn texture.</p></dd>
-					<dt>2. Level: <em>options</em></dt><dd>
-						<p>Each of these refers to one of the versions registered via the <code>versions</code> list.</p>
-						<p>A special option called <code>coords</code> instead contains a list of texture coordinates.</p></dd>
-					<dt>3. Level (inside each <code>coords</code> option): coordinates</dt><dd>
-						Coordinates are in the form <code>[x,y]</code>, so e.g. <code>[0,15]</code> refers to the texture on the bottom of the first column (start of break animation).</dd>
-				</dl>
-				An small example for a settings variable would be:<pre><code>var settings = {
-	"Pumpkin": {
-		"Faceless":     6,
-		"Creeper face": 7,
-		"coords": [[6,6],[6,7],[7,7],[8,7]]
-	}
-};</code></pre>
-			</li>
-			<li>Finally don’t forget to replace the title of the HTML page!</li>
-		</ol>
-	</div>
-</header>
-
-<form id="settings">
-	<canvas id="terrain"/>
-</form>
-
-<div id="versions_container">
-	<button id="versions_button">Changelist</button>
-	<dl id="versions">
-		<h1>Changelist</h1>
-		<dt>1.5</dt><dd>Internal changes thanks to Kurtextrem and aSakofDonuts</dd>
-		<dt>1.4a</dt><dd>Readded SakOfDonuts’ glass &amp; glowstone<br/>Fixed TNT</dd>
-		<dt>1.4</dt><dd>Redid Layout</dd>
-		<dt>1.3a</dt><dd>Fixed TNT missing</dd>
-		<dt>1.3</dt><dd>Added 7.4</dd>
-		<dt>1.2a</dt><dd>Added 7.3a</dd>
-		<dt>1.2</dt><dd>Added everything from V2 up</dd>
-		<dt>1.1</dt><dd>Added 7.3</dd>
-		<dt>1.0</dt><dd>Removed Doku’s textures on request<br/>Added changelist</dd>
-		<dt>0.6</dt><dd>Added „Create your own“ instructions</dd>
-		<dt>0.5</dt><dd>Added usage instructions<br/>restyle</dd>
-		<dt>0.1</dt><dd>Basic functional version</dd>
-	</dl>
-</div>
-
-<footer>
-	This Tool is made by <a href="http://red-sheep.de">flying sheep</a> and licensed under the GPLv2.
-	<aside>Textures by JohnSmith, tweaks by aSakofDonuts.</aside>
-</footer>
-
-</article></body>
+</body>
 </html>
