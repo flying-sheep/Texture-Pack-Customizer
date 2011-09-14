@@ -152,8 +152,10 @@ $(document).ready(function() {
 			
 			var option = $("<option/>")
 				.text(optionName)
-				.attr("selected", setting[optionName] == lastVersion)
 				.appendTo(select);
+			
+			if (setting[optionName] == lastVersion)
+				option.attr("selected", "selected");
 		}
 		
 		function selected(aEvt) {
