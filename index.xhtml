@@ -77,12 +77,13 @@
 	<button id="versions_button">Changelist</button>
 	<dl id="versions">
 		<h1>Changelist</h1>
-		<dt>1.6a</dt><dd>Added IHaTeD2’s tweaks to the “light” ores</dd>
+		<dt>1.7</dt><dd>Added persistent URL<br/>Fixed override</dd>
+		<dt>1.6b</dt><dd>Added IHaTeD2’s tweaks to the “light” ores</dd>
 		<dt>1.6a</dt><dd>Added 8.1</dd>
-		<dt>1.6</dt><dd>Added 8, fixed wrong default selection, upgraded jCanvas</dd>
+		<dt>1.6</dt><dd>Added 8<br/>Fixed wrong default selection<br/>Upgraded jCanvas</dd>
 		<dt>1.5a</dt><dd>Added “for” attribute to labels</dd>
 		<dt>1.5</dt><dd>Internal changes thanks to Kurtextrem and aSakofDonuts</dd>
-		<dt>1.4a</dt><dd>Readded SakOfDonuts’ glass &amp; glowstone<br/>Fixed TNT</dd>
+		<dt>1.4a</dt><dd>Readded aSakOfDonuts’ glass &amp; glowstone<br/>Fixed TNT</dd>
 		<dt>1.4</dt><dd>Redid Layout</dd>
 		<dt>1.3a</dt><dd>Fixed TNT missing</dd>
 		<dt>1.3</dt><dd>Added 7.4</dd>
@@ -91,7 +92,7 @@
 		<dt>1.1</dt><dd>Added 7.3</dd>
 		<dt>1.0</dt><dd>Removed Doku’s textures on request<br/>Added changelist</dd>
 		<dt>0.6</dt><dd>Added „Create your own“ instructions</dd>
-		<dt>0.5</dt><dd>Added usage instructions<br/>restyle</dd>
+		<dt>0.5</dt><dd>Added usage instructions<br/>Restyle</dd>
 		<dt>0.1</dt><dd>Basic functional version</dd>
 	</dl>
 </div>
@@ -116,6 +117,14 @@ var debug = false;
 
 //INITIALIZATION
 var lastVersion = versions[versions.length-1];
+var changedSettings = {};
+if (location.hash) {
+	var hash = location.href.substring(location.href.indexOf("#") + 1);
+	hash.split("&").forEach(function(settingString) {
+		var setting = settingString.split("=");
+		changedSettings[setting[0]] = setting[1];
+	});
+}
 
 //FINISH INITIALISATION
 $(document).ready(function() {
@@ -126,11 +135,14 @@ $(document).ready(function() {
 		.bind("contextmenu", saveCanvas)
 		.drawImage({
 			source: imgPath(lastVersion),
-			x: 256, y: 256
+			x: 256, y: 256,
+			load: function() {
+				if ("override" in settings)
+					swap("override", "pack");
+				for (settingName in changedSettings)
+					swap(settingName, changedSettings[settingName]);
+			}
 		});
-	
-	if ("override" in settings)
-		swap("override", "pack");
 	
 	var form = $("#settings");
 	
@@ -156,7 +168,10 @@ $(document).ready(function() {
 				.text(optionName)
 				.appendTo(select);
 			
-			if (setting[optionName] == lastVersion)
+			if (changedSettings[settingName]) {
+				if (changedSettings[settingName] == optionName)
+					option.attr("selected", "selected");
+			} else if (setting[optionName] == lastVersion)
 				option.attr("selected", "selected");
 		}
 		
@@ -193,6 +208,16 @@ function swap(settingName, optionName) {
 	if (debug) console.log("Set", settingName, "to", optionName);
 	
 	var setting = settings[settingName];
+	
+	if (setting[optionName] != lastVersion)
+		changedSettings[settingName] = optionName;
+	else
+		delete changedSettings[settingName];
+	var hash = [];
+	for (settingName in changedSettings)
+		if (settingName != "override")
+			hash.push(settingName + "=" + changedSettings[settingName]);
+	location.replace("#" + hash.join("&"));
 	
 	var img = imgPath(setting[optionName]);
 	var coords = setting.coords;
