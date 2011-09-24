@@ -77,6 +77,7 @@
 	<button id="versions_button">Changelist</button>
 	<dl id="versions">
 		<h1>Changelist</h1>
+		<dt>1.7a</dt><dd>Fixed Settings with “&amp;”</dd>
 		<dt>1.7</dt><dd>Added persistent URL<br/>Fixed override</dd>
 		<dt>1.6b</dt><dd>Added IHaTeD2’s tweaks to the “light” ores</dd>
 		<dt>1.6a</dt><dd>Added 8.1</dd>
@@ -120,7 +121,7 @@ var lastVersion = versions[versions.length-1];
 var changedSettings = {};
 if (location.hash) {
 	var hash = location.href.substring(location.href.indexOf("#") + 1);
-	hash.split("&").forEach(function(settingString) {
+	decodeURI(hash).split("&&").forEach(function(settingString) {
 		var setting = settingString.split("=");
 		changedSettings[setting[0]] = setting[1];
 	});
@@ -217,7 +218,7 @@ function swap(settingName, optionName) {
 	for (settingName in changedSettings)
 		if (settingName != "override")
 			hash.push(settingName + "=" + changedSettings[settingName]);
-	location.replace("#" + hash.join("&"));
+	location.replace("#" + hash.join("&&"));
 	
 	var img = imgPath(setting[optionName]);
 	var coords = setting.coords;
