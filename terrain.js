@@ -195,7 +195,11 @@ var settings = {
 	"override": {
 		"pack": "sakofdonuts",
 		"coords": [
-			[3,8], [3,9] //repeater
+			[12,4],                //water lily
+			[13,4], [14,4],        //mycelium
+			[3,8], [3,9],          //repeater
+			[0,14],                //nether brick
+			[2,14], [3,14], [4,14] //nether wart
 		]}
 	//TODO (custom alternative): other break anims
 	//TODO: externalize
