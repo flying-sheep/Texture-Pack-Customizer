@@ -27,7 +27,7 @@
 		<li>See what they do on the left</li>
 		<li>Click on the image to save<br/>(Firefox users can use the Context Menu)</li>
 		<li>Save as (or rename to) <code>terrain.png</code></li>
-		<li>Replace <code>terrain.png</code> in <code>johnsmith_v7.2.zip</code></li>
+		<li>Replace <code>terrain.png</code> in <code>johnsmith_v<span id="version">x.x</span>.zip</code></li>
 	</ol>
 	<h2>Extension</h2>
 	<p>Made a texture pack?<br/>Want a customizer for one?</p>
@@ -130,6 +130,8 @@ if (location.hash) {
 
 //FINISH INITIALISATION
 $(document).ready(function() {
+	$("#version").text(lastVersion);
+	
 	var canvas = $("#terrain")
 		.attr("width",  512)
 		.attr("height", 512) //TODO
