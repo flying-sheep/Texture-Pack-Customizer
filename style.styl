@@ -1,0 +1,104 @@
+column-width(length)
+	-webkit-column-width length
+	-moz-column-width    length
+	-o-column-width      length
+	column-width         length
+
+html, body
+	margin 0
+	padding 0
+	height 100%
+	font-family sans-serif
+
+article
+	display block
+	position relative
+	min-height 100%
+
+em em, dt
+	font-weight bold
+
+pre > code
+	display block
+	outline 1px dashed white
+	outline-offset 1ex
+	overflow auto
+
+form
+	min-width 512px
+	padding 16px
+	/* this actually makes it adapt to its floating content’s size */
+	overflow hidden
+	padding-bottom 3em
+
+canvas
+	cursor pointer
+	margin-bottom 16px
+
+form > div
+	width 256px
+
+form > div, canvas
+	float left
+
+label, select
+	width 128px
+
+label
+	display inline-block
+	text-align right
+
+select
+	color buttontext
+
+header, footer
+	display block
+	background-color black
+	color white
+	padding 1ex 1%
+
+header
+	column-width 393px
+
+footer
+	width 98%
+	position  absolute
+	bottom 0
+	
+	> aside
+		float right
+
+footer a
+	&:link, &:visited
+		color #0cf
+		text-decoration none
+		
+		&:hover
+			text-decoration underline
+
+#guide
+	display none
+	margin-bottom 3em
+
+#versions_container
+	position fixed
+	top 0
+	right 0
+	background-color rgba(255, 255, 255, .75)
+	border solid rgba(0, 0, 0, .6)
+	border-width 0 0 1px 1px
+	border-radius 1em
+	border-top-right-radius 0
+	max-width 400px
+	max-height 95%
+	overflow auto
+	padding 1ex
+
+#versions_button
+	opacity .6
+#versions
+	display none
+
+/* debug */
+h1
+	clear left
