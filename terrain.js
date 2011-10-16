@@ -200,9 +200,14 @@ var settings = {
 	"override": {
 		"pack": "sakofdonuts",
 		"coords": [
-			[3,8], [3,9],          //repeater
-			[8,8], [9,8],          //melon
-			[13,7], [14,7], [13,8] //funghi
+			[3,8], [3,9],                     //repeater
+			[8,8], [9,8],                     //melon
+			[15,6], [15,7],                   //stems
+			[13,7], [14,7], [13,8],           //funghi
+			[10,8], [11,8], [10,9], [11,9],   //cauldron
+			[12,9], [13,9],                   //brewing stand
+			[14,9], [15,9], [14,10], [15,10], //whitestone, end portal
+			[6,10], [6,11], [7,11]            //enchanting table
 		]}
 	//TODO (custom alternative): other break anims
 	//TODO: externalize
