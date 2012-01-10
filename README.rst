@@ -15,6 +15,11 @@ Additional stuff
 *	`serve.sh` creates a small python webserver and starts firefox, since some
 	security policies prevent firefox from cd-ing to data:uris. \*shrug\*
 
+Used projects
+=============
+*	JSZip_
+*	Canvas2Image_
+
 License
 =======
 This is released under the GPLv2
@@ -27,3 +32,6 @@ TODO
 *	Make changelist `overflow: auto`
 *	“Loading” message
 *	Content area background color is different in browsers
+
+.. _JSZip: http://jszip.stuartk.co.uk
+.. _Canvas2Image: http://www.nihilogic.dk/labs/canvas2image
