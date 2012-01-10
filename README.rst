@@ -18,6 +18,7 @@ Additional stuff
 Used projects
 =============
 *	JSZip_
+*	JCanvas_ (David Duponchel’s branch_)
 *	Canvas2Image_
 
 License
@@ -34,4 +35,6 @@ TODO
 *	Content area background color is different in browsers
 
 .. _JSZip: http://jszip.stuartk.co.uk
+.. _JCanvas: http://calebevans.me/projects/jcanvas/
+.. _branch: https://github.com/dduponchel/jszip
 .. _Canvas2Image: http://www.nihilogic.dk/labs/canvas2image
