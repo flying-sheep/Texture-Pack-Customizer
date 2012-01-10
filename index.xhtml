@@ -122,7 +122,6 @@
 var debug = false;
 
 //INITIALIZATION
-var lastVersion = versions[versions.length-1];
 var changedSettings = {};
 if (location.hash) {
 	var hash = location.href.substring(location.href.indexOf("#") + 1);
@@ -194,18 +193,6 @@ $(document).ready(function() {
 	
 	blockToggle("guide");
 	blockToggle("versions");
-	
-	if (debug) for (var v in versions) {
-		$("body")
-			.append(
-				$("<h1/>")
-					.text("terrain.png version: "+v)
-			)
-			.append(
-				$("<img/>")
-					.attr("src", imgPath(versions[v]))
-			);
-	}
 });
 
 //HELPER FUNCTIONS
