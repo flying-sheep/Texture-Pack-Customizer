@@ -1,0 +1,6 @@
+[submodule "lib/jszip"]
+	path = lib/jszip
+	url = https://github.com/dduponchel/jszip.git
+[submodule "lib/jcanvas"]
+	path = lib/jcanvas
+	url = https://github.com/caleb531/jcanvas.git
