@@ -216,5 +216,4 @@ var settings = {
 			[14,9], [15,9], [14,10], [15,10] //whitestone, end portal
 		]}
 	//TODO (custom alternative): other break anims
-	//TODO: externalize
 };
