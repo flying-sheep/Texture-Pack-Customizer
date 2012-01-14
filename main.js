@@ -1,7 +1,6 @@
 var debug = false;
 
 //INITIALIZATION
-var lastVersion = versions[versions.length-1];
 var changedSettings = {};
 if (location.hash) {
 	var hash = location.href.substring(location.href.indexOf("#") + 1);
