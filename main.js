@@ -1,14 +1,39 @@
 var debug = false;
 
 //INITIALIZATION
-var changedSettings = {};
-if (location.hash) {
-	var hash = location.href.substring(location.href.indexOf("#") + 1);
-	decodeURI(hash).split("&&").forEach(function(settingString) {
-		var setting = settingString.split("=");
-		changedSettings[setting[0]] = setting[1];
-	});
+var urlSettings = {
+	"changedSettings": {},
+	"fromUrl": function() {
+		if (location.hash) {
+			var hash = location.href.substring(location.href.indexOf("#") + 1);
+			decodeURI(hash).split("&&").forEach(function(settingString) {
+				var setting = settingString.split("=");
+				urlSettings.changedSettings[setting[0]] = setting[1];
+			});
+		}
+	},
+	"toUrl": function() {
+		var hash = [];
+		for (settingName in urlSettings.changedSettings)
+			if (settingName != "override")
+				hash.push(settingName + "=" + urlSettings.changedSettings[settingName]);
+		location.replace("#" + hash.join("&&"));
+	},
+	"apply": function() {
+		for (settingName in urlSettings.changedSettings)
+			swap(settingName, urlSettings.changedSettings[settingName]);
+	},
+	"set": function(settingName, optionName) {
+		var setting = settings[settingName];
+		
+		if (setting[optionName] != lastVersion)
+			urlSettings.changedSettings[settingName] = optionName;
+		else
+			delete urlSettings.changedSettings[settingName];
+	}
 }
+
+urlSettings.fromUrl();
 
 //FINISH INITIALISATION
 $(document).ready(function() {
@@ -25,8 +50,7 @@ $(document).ready(function() {
 			load: function() {
 				if ("override" in settings)
 					swap("override", "pack");
-				for (settingName in changedSettings)
-					swap(settingName, changedSettings[settingName]);
+				urlSettings.apply();
 			}
 		});
 	
@@ -54,8 +78,8 @@ $(document).ready(function() {
 				.text(optionName)
 				.appendTo(select);
 			
-			if (changedSettings[settingName]) {
-				if (changedSettings[settingName] == optionName)
+			if (urlSettings.changedSettings[settingName]) {
+				if (urlSettings.changedSettings[settingName] == optionName)
 					option.attr("selected", "selected");
 			} else if (setting[optionName] == lastVersion)
 				option.attr("selected", "selected");
@@ -95,15 +119,8 @@ function swap(settingName, optionName) {
 	
 	var setting = settings[settingName];
 	
-	if (setting[optionName] != lastVersion)
-		changedSettings[settingName] = optionName;
-	else
-		delete changedSettings[settingName];
-	var hash = [];
-	for (settingName in changedSettings)
-		if (settingName != "override")
-			hash.push(settingName + "=" + changedSettings[settingName]);
-	location.replace("#" + hash.join("&&"));
+	urlSettings.set(settingName, optionName);
+	urlSettings.toUrl();
 	
 	var img = imgPath(setting[optionName]);
 	var coords = setting.coords;
