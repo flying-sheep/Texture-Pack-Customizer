@@ -8,7 +8,7 @@ var settings = {
 		"coords": [[2,0],[3,0],[4,4],[6,2]]},
 	"Mycelium": {
 		"grass": lastVersion,
-		"squishy": "sakofdonuts",
+		"squishy": "alt",
 		"coords": [[13,4],[14,4]]},
 	"Stone & Ore": {
 		"dark":   6,
@@ -95,18 +95,18 @@ var settings = {
 	"Iron door": {
 		"bars":   7.4,
 		"heavy":  lastVersion,
-		"framed": "sakofdonuts",
+		"framed": "alt",
 		"coords": [[2,5],[2,6]]},
 	"Ladder": {
 		"bound":   7,
 		"loose":   7.3,
-		"looser": "sakofdonuts",
+		"looser": "alt",
 		"nailed":  7.4,
 		"sparse":  lastVersion,
 		"coords": [[3,5]]},
 	"Trapdoor": {
 		"solid":  lastVersion,
-		"grate": "sakofdonuts",
+		"grate": "alt",
 		"coords": [[4,5]]},
 	"Glass": {
 		"light frame": 6,
@@ -115,7 +115,7 @@ var settings = {
 		"grate":       7.3,
 		"mini grate":  7.4,
 		"fine":        lastVersion,
-		"wood frame":  "sakofdonuts",
+		"wood frame":  "alt",
 		"coords": [[1,3]]},
 	"Glowstone": {
 		"organic":    6,
@@ -125,17 +125,17 @@ var settings = {
 		"mini grate": 7.4,
 		"pale":       8.1,
 		"lantern":    lastVersion,
-		"wood frame": "sakofdonuts",
+		"wood frame": "alt",
 		"coords": [[9,6]]},
 	"Wheat": {
 		"chaotic":  6,
 		"upright":  7.4,
 		"wild":     lastVersion,
-		"vertical": "sakofdonuts",
+		"vertical": "alt",
 		"coords": [[8,5],[9,5],[10,5],[11,5],[12,5],[13,5],[14,5],[15,5]]},
 	"Shrooms": {
 		"skinny": lastVersion,
-		"fat":    "sakofdonuts",
+		"fat":    "alt",
 		"coords": [[12,1],[13,1]]},
 	"Cactus": {
 		"smooth": 5,
@@ -152,7 +152,7 @@ var settings = {
 		"lit":         7.4,
 		"offset jack": 8.3,
 		"round":       lastVersion,
-		"creeper": "sakofdonuts",
+		"creeper": "alt",
 		"coords": [[6,6],[6,7],[7,7],[8,7]]},
 	"Shrubs & Saplings": {
 		"leafy": 7.4,
@@ -196,16 +196,16 @@ var settings = {
 		"brown":    7.3,
 		"crimson":  7.4,
 		"brownish": lastVersion,
-		"creeper": "sakofdonuts",
+		"creeper": "alt",
 		"coords": [[6,8],[7,8],[5,9],[6,9],[7,9],[8,9]]},
 	"Web": {
 		"dusty": lastVersion,
-		"white": "sakofdonuts",
+		"white": "alt",
 		"coords": [[11,0]]},
 	
 	//this setting is used to specify overrides. textures are sawpped with it immidiately after initial painting
 	"override": {
-		"pack": "sakofdonuts",
+		"pack": "alt",
 		"coords": [
 			[3,8], [3,9],                    //repeater
 			[8,8], [9,8],                    //melon
