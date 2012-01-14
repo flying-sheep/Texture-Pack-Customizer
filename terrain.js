@@ -217,3 +217,9 @@ var settings = {
 		]}
 	//TODO (custom alternative): other break anims
 };
+
+var versions = {};
+for each (var setting in settings)
+	for each (var version in setting)
+		if (typeof version == "number" || typeof version == "string")
+			versions[version] = true;
