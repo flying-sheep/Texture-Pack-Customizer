@@ -14,10 +14,15 @@
 <head>
 	<title>JohnSmith Customizer</title>
 	<link rel="stylesheet" href="style.css"/>
-	<script type="text/javascript" src="lib/base64.js"/>
-	<script type="text/javascript" src="lib/canvas2image.js"/>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"/>
-	<script type="text/javascript" src="lib/jcanvas/jcanvas.min.js"/>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"/>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"/>
+<script type="text/javascript" src="lib/raphael/raphael-min.js"/>
+<script type="text/javascript" src="lib/jquery.raphael.spinner/jquery.raphael.spinner.js"/>
+<script type="text/javascript" src="lib/jcanvas/jcanvas.js"/>
+<script type="text/javascript" src="lib/jszip/jszip.js"/>
+<script type="text/javascript" src="lib/jszip/jszip-deflate.js"/>
+<script type="text/javascript" src="lib/jszip/jszip-inflate.js"/>
+<script type="text/javascript" src="lib/jszip/jszip-load.js"/>
 	<script type="text/javascript" src="terrain.js"/>
 	<script type="text/javascript" src="main.js"/>
 </head>
@@ -76,7 +81,12 @@
 </header>
 
 <form id="settings">
-	<canvas id="terrain"/>
+	<ul>
+		<li><a href="#terrain_tab">Terrain</a></li>
+		<li><a href="#mob_tab">Mob</a></li>
+	</ul>
+	<div id="terrain_tab"><canvas id="terrain"/></div>
+	<div id="mob_tab"><div id="mob"/></div>
 </form>
 
 <div id="versions_container">

@@ -3,12 +3,14 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  overflow: hidden;
   font-family: sans-serif;
 }
 article {
   display: block;
   position: relative;
-  min-height: 100%;
+  height: 100%;
+  overflow: auto;
 }
 em em,
 dt {
@@ -24,18 +26,19 @@ form {
   min-width: 512px;
   padding: 16px;
   overflow: hidden;
-  padding-bottom: 3em;
-}
-canvas {
-  cursor: pointer;
-  margin-bottom: 16px;
 }
 form > div {
+  overflow: hidden;
+}
+form > div > div {
   width: 256px;
 }
-form > div,
-canvas {
+form > div > div,
+form > div canvas {
   float: left;
+}
+canvas {
+  margin-bottom: 16px;
 }
 label,
 select {
@@ -47,6 +50,35 @@ label {
 }
 select {
   color: buttontext;
+}
+.ui-tabs .ui-tabs-hide {
+  display: none;
+}
+.ui-tabs .ui-tabs-nav {
+  background-color: #000;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.ui-tabs .ui-tabs-nav li {
+  list-style: none;
+  float: left;
+}
+.ui-tabs .ui-tabs-nav li a:link {
+  display: block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  color: #fff;
+}
+.ui-tabs .ui-tabs-nav li a:link:focus {
+  outline: none;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected {
+  background-color: #fff;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a:link {
+  cursor: text;
+  color: #000;
 }
 header,
 footer {
@@ -62,8 +94,7 @@ header {
 }
 footer {
   width: 98%;
-  position: absolute;
-  bottom: 0;
+  overflow: hidden;
 }
 footer > aside {
   float: right;

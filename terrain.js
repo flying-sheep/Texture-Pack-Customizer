@@ -210,7 +210,7 @@ var settings = {
 		"white": "alt",
 			"coords": [[11,0]]},
 		
-		//this setting is used to specify overrides. textures are sawpped with it immidiately after initial painting
+		//this setting is used to specify overrides. textures are swapped with it immidiately after initial painting
 		"override": {
 		"pack": "alt",
 			"coords": [

@@ -7,12 +7,14 @@ html, body
 	margin 0
 	padding 0
 	height 100%
+	overflow hidden
 	font-family sans-serif
 
 article
 	display block
 	position relative
-	min-height 100%
+	height 100%
+	overflow auto
 
 em em, dt
 	font-weight bold
@@ -28,17 +30,19 @@ form
 	padding 16px
 	/* this actually makes it adapt to its floating content’s size */
 	overflow hidden
-	padding-bottom 3em
+	
+	> div
+		overflow hidden
+		
+		> div
+			width 256px
+		
+		> div, canvas
+			float left
 
 canvas
-	cursor pointer
 	margin-bottom 16px
 
-form > div
-	width 256px
-
-form > div, canvas
-	float left
 
 label, select
 	width 128px
@@ -49,6 +53,36 @@ label
 
 select
 	color buttontext
+
+.ui-tabs
+	.ui-tabs-hide
+		display none
+	
+	.ui-tabs-nav
+		background-color black
+		margin 0
+		padding 0
+		overflow hidden
+		
+		li
+			list-style none
+			float left
+			
+			a:link
+				display block
+				padding .5em 1em
+				text-decoration none
+				color white
+				
+				&:focus
+					outline none
+			
+			&.ui-tabs-selected
+				background-color white
+				
+				a:link
+					cursor text
+					color black
 
 header, footer
 	display block
@@ -61,8 +95,7 @@ header
 
 footer
 	width 98%
-	position  absolute
-	bottom 0
+	overflow hidden
 	
 	> aside
 		float right

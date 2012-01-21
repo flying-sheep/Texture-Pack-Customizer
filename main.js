@@ -35,120 +35,173 @@ var urlSettings = {
 
 urlSettings.fromUrl();
 
-//FINISH INITIALISATION
-$(document).ready(function() {
-	$("#version").text(lastVersion);
-	
-	var canvas = $("#terrain")
-		.attr("width",  512)
-		.attr("height", 512) //TODO
-		.click(saveCanvas)
-		.bind("contextmenu", saveCanvas)
-		.drawImage({
-			source: imgPath(lastVersion),
-			x: 256, y: 256,
-			load: function() {
-				if ("override" in settings)
-					swap("override", "pack");
-				urlSettings.apply();
-			}
-		});
-	
-	var form = $("#settings");
-	
-	for (var settingName in settings) {
-		if (settingName == "override") break;
-		
-		setting = settings[settingName];
-		
-		var select = $("<select/>", {"id": settingName})
-			.appendTo(
-				$("<div/>")
-					.append(
-						$("<label/>", {"for": settingName})
-							.text(settingName)
-					)
-					.appendTo(form)
-			);
-		
-		for (var optionName in setting) {
-			if (optionName == "coords") break;
-			
-			var option = $("<option/>")
-				.text(optionName)
-				.appendTo(select);
-			
-			if (urlSettings.changedSettings[settingName]) {
-				if (urlSettings.changedSettings[settingName] == optionName)
-					option.attr("selected", "selected");
-			} else if (setting[optionName] == lastVersion)
-				option.attr("selected", "selected");
-		}
-		
-		function selected(aEvt) {
-			var sel  = aEvt.target;
-			var opt  = sel.options[sel.selectedIndex].textContent;
-			swap(sel.id, opt);
-		}
-		select.change(selected);
-		select.keyup(selected);
-	}
-	
-	blockToggle("guide");
-	blockToggle("versions");
-	
-	if (debug) for (var v in versions) {
-		$("body")
-			.append(
-				$("<h1/>")
-					.text("terrain.png version: "+v)
-			)
-			.append(
-				$("<img/>")
-					.attr("src", imgPath(versions[v]))
-			);
-	}
+$.ajaxSetup({
+	mimeType: "text/plain; charset=x-user-defined",
+	error: function(req, status, error) { console.error(error); }
 });
 
-//HELPER FUNCTIONS
-function saveCanvas() {Canvas2Image.saveAsPNG($("#terrain")[0])}
-function imgPath(name) {return "terrain.png/"+name+".png"}
+var zips = {};
 
-function swap(settingName, optionName) {
-	if (debug) console.log("Set", settingName, "to", optionName);
+var util = {
+	getCanvas: function(sheetName) {
+		return $("#" + sheetName.replace(".png",""))
+	},
+	imgData: function(sheetName, version) {
+		var data = "data:image/png;base64,";
+		return data + btoa(zips[version].file(sheetName).data);
+	},
+	packUrl: function(version) {
+		if (version.toFixed)
+			version = version.toFixed(1);
+		return "packs/johnsmith_v"+version+".zip";
+	},
+	loadPack: function(version, callback) {
+		overlay.show();
+		$.ajax({
+			url: util.packUrl(version),
+			success: function(data) {
+				zips[version] = new JSZip(data);
+				overlay.hide();
+				callback();
+			}
+		});
+	}
+}
+
+var overlay = {
+	count: 0,
+	show: function() {
+		if (overlay.count++ == 0) {
+			overlay.overlay = $("<div/>")
+				.css({
+					position: "absolute",
+					left:     0,
+					top:      0,
+					display:  "table",
+					width:    "100%",
+					height:   "100%",
+					backgroundColor: "rgba(0,0,0,.3)"
+				})
+				.appendTo("body")
+				.append(
+					$("<div/>")
+						.css({
+							display: "table-cell",
+							textAlign: "center",
+							verticalAlign: "middle"
+						})
+						.spinner({
+							innerRadius: 32,
+							outerRadius: 64,
+							strokeWidth: 12,
+							color: "#fff"
+						})
+				);
+		}
+	},
+	hide: function() {
+		if (--overlay.count == 0)
+			overlay.overlay.remove();
+	}
+};
+
+function swap(sheetName, settingName, optionName) {
+	if (debug) console.log("Setting in", sheetName, settingName, "to", optionName);
 	
-	var setting = settings[settingName];
+	var setting = settings[sheetName][settingName];
+	var version = setting[optionName];
 	
-	urlSettings.set(settingName, optionName);
-	urlSettings.toUrl();
-	
-	var img = imgPath(setting[optionName]);
 	var coords = setting.coords;
 	
-	if (debug) console.log("Use", img, "for tiles", coords);
+	if (debug) console.log("Use", sheetName, "for tiles", coords);
 	
-	var canvas = $("#terrain");
+	var canvas = util.getCanvas(sheetName);
 	
 	var u = canvas.width()/16;
 	
-	coords.forEach(function(coord) {
-		var x = coord[0] * u + u/2;
-		var y = coord[1] * u + u/2;
-		
-		canvas
-			.clearCanvas({
-				x:x,     y:y,
-				width:u, height:u
-			})
-			.drawImage({
-				source: img,
-				sx:x,     sy:y,
-				sWidth:u, sHeight:u,
-				x:x,     y:y,
-				width:u, height:u
-			});
-	});
+	function doSwap() {
+		coords.forEach(function(coord) {
+			var x = coord[0] * u + u/2;
+			var y = coord[1] * u + u/2;
+			
+			canvas
+				.clearCanvas({
+					x:x,     y:y,
+					width:u, height:u
+				})
+				.drawImage({
+					source: util.imgData(sheetName, version),
+					sx:x,     sy:y,
+					sWidth:u, sHeight:u,
+					x:x,     y:y,
+					width:u, height:u
+				});
+		});
+	}
+	
+	if (!zips[version])
+		util.loadPack(version, doSwap);
+	else doSwap();
 }
+
+$(function() {
+	$("#settings").tabs();
+	
+	for (var sheetName in settings) {
+		if (sheetName == "mob") continue;
+		
+		var sheet = settings[sheetName];
+		var canvas = util.getCanvas(sheetName)
+			.attr("width",  512)
+			.attr("height", 512); //TODO
+		
+		util.loadPack(lastVersion, function() {
+			canvas.drawImage({
+				source: util.imgData(sheetName, lastVersion),
+				x: 256, y: 256,
+				load: function() {
+					if ("override" in sheet)
+						swap(sheetName, "override", "pack");
+				}
+			});
+		});
+		
+		for (var settingName in sheet) {
+			if (settingName == "override") break;
+			
+			setting = sheet[settingName];
+			
+			var select = $("<select/>", {id: settingName})
+				.appendTo(
+					$("<div/>")
+						.append(
+							$("<label/>", {for: settingName})
+								.text(settingName)
+						)
+						.appendTo(canvas.parent())
+				);
+			
+			for (var optionName in setting) {
+				if (optionName == "coords") break;
+				
+				var option = $("<option/>")
+					.text(optionName)
+					.appendTo(select);
+				
+				if (setting[optionName] == lastVersion)
+					option.attr("selected", "selected");
+			}
+			
+			function selected(aEvt) {
+				var sel  = aEvt.target;
+				var opt  = sel.options[sel.selectedIndex].textContent;
+				swap(sheetName, sel.id, opt);
+			}
+			select.change(selected);
+			select.keyup(selected);
+		}
+	}
+});
 
 function blockToggle(id) {
 	var inButton = $("#"+id+"_button");
