@@ -201,6 +201,9 @@ $(function() {
 			select.keyup(selected);
 		}
 	}
+	
+	blockToggle("versions");
+	blockToggle("guide");
 });
 
 function blockToggle(id) {
