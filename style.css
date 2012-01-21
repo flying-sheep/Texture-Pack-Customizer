@@ -24,10 +24,10 @@ pre > code {
 }
 form {
   min-width: 512px;
-  padding: 16px;
   overflow: hidden;
 }
 form > div {
+  padding: 16px;
   overflow: hidden;
 }
 form > div > div {
