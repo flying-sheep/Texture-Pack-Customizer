@@ -73,23 +73,10 @@ var overlay = {
 	show: function() {
 		if (overlay.count++ == 0) {
 			overlay.overlay = $("<div/>")
-				.css({
-					position: "absolute",
-					left:     0,
-					top:      0,
-					display:  "table",
-					width:    "100%",
-					height:   "100%",
-					backgroundColor: "rgba(0,0,0,.3)"
-				})
+				.attr("id", "overlay")
 				.appendTo("body")
 				.append(
 					$("<div/>")
-						.css({
-							display: "table-cell",
-							textAlign: "center",
-							verticalAlign: "middle"
-						})
 						.spinner({
 							innerRadius: 32,
 							outerRadius: 64,

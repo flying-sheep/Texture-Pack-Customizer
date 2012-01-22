@@ -7,14 +7,12 @@ html, body
 	margin 0
 	padding 0
 	height 100%
-	overflow hidden
 	font-family sans-serif
 
 article
 	display block
 	position relative
-	height 100%
-	overflow auto
+	min-height 100%
 
 em em, dt
 	font-weight bold
@@ -29,6 +27,7 @@ form
 	min-width 512px
 	/* this actually makes it adapt to its floating content’s size */
 	overflow hidden
+	padding-bottom 3em
 	
 	> div
 		padding 16px
@@ -95,6 +94,8 @@ header
 
 footer
 	width 98%
+	position absolute
+	bottom 0
 	overflow hidden
 	
 	> aside
@@ -107,6 +108,20 @@ footer a
 		
 		&:hover
 			text-decoration underline
+
+#overlay
+	position fixed
+	left     0
+	top      0
+	display  table
+	width    100%
+	height   100%
+	background-color rgba(0,0,0,.3)
+	
+	> div
+		display        table-cell
+		text-align     center
+		vertical-align middle
 
 #guide
 	display none
