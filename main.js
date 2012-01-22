@@ -2,8 +2,8 @@ var debug = false;
 
 //INITIALIZATION
 var urlSettings = {
-	"changedSettings": {},
-	"fromUrl": function() {
+	changedSettings: {},
+	fromUrl: function() {
 		if (location.hash) {
 			var hash = location.href.substring(location.href.indexOf("#") + 1);
 			decodeURI(hash).split("&&").forEach(function(settingString) {
@@ -12,18 +12,18 @@ var urlSettings = {
 			});
 		}
 	},
-	"toUrl": function() {
+	toUrl: function() {
 		var hash = [];
 		for (settingName in urlSettings.changedSettings)
 			if (settingName != "override")
 				hash.push(settingName + "=" + urlSettings.changedSettings[settingName]);
 		location.replace("#" + hash.join("&&"));
 	},
-	"apply": function() {
+	apply: function() {
 		for (settingName in urlSettings.changedSettings)
 			swap(settingName, urlSettings.changedSettings[settingName]);
 	},
-	"set": function(settingName, optionName) {
+	set: function(settingName, optionName) {
 		var setting = settings[settingName];
 		
 		if (setting[optionName] != lastVersion)
@@ -203,8 +203,8 @@ function blockToggle(id) {
 		outButton = $("<button/>")
 			.text("×")
 			.css({
-				"display": "none",
-				"float": "right"
+				display: "none",
+				float: "right"
 			})
 			.insertBefore(inButton);
 	}
