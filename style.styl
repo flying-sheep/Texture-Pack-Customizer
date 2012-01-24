@@ -101,13 +101,12 @@ footer
 	> aside
 		float right
 
-footer a
-	&:link, &:visited
-		color #0cf
-		text-decoration none
-		
-		&:hover
-			text-decoration underline
+a:link, a:visited
+	color #0cf
+	text-decoration none
+	
+	&:hover
+		text-decoration underline
 
 #overlay
 	position fixed
@@ -125,7 +124,9 @@ footer a
 
 #guide
 	display none
-	margin-bottom 3em
+	
+	ol
+		margin-bottom 0
 
 #versions_container
 	position fixed

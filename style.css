@@ -100,13 +100,13 @@ footer {
 footer > aside {
   float: right;
 }
-footer a:link,
-footer a:visited {
+a:link,
+a:visited {
   color: #0cf;
   text-decoration: none;
 }
-footer a:link:hover,
-footer a:visited:hover {
+a:link:hover,
+a:visited:hover {
   text-decoration: underline;
 }
 #overlay {
@@ -125,7 +125,9 @@ footer a:visited:hover {
 }
 #guide {
   display: none;
-  margin-bottom: 3em;
+}
+#guide ol {
+  margin-bottom: 0;
 }
 #versions_container {
   position: fixed;
