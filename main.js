@@ -189,6 +189,7 @@ $(function() {
 		}
 	}
 	
+	$("#version").text(lastVersion);
 	blockToggle("versions");
 	blockToggle("guide");
 });
