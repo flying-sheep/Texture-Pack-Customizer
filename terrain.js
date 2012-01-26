@@ -1,4 +1,4 @@
-var lastVersion = 8.4;
+var lastVersion = 9;
 
 var settings = {
 	"Dirt and Grass": {
@@ -11,10 +11,11 @@ var settings = {
 		"squishy": "alt",
 		"coords": [[13,4],[14,4]]},
 	"Stone & Ore": {
-		"dark":   6,
-		"light":  7.3,
-		"cobble": 7.4,
-		"big":    lastVersion,
+		"dark":        6,
+		"light":       7.3,
+		"cobble":      7.4,
+		"big":         8.4,
+		"big diamond": lastVersion,
 		"coords": [[1,0], [0,2], [1,2], [2,2], [2,3], [3,3], [0,10]]},
 	"Cobble & Moss": {
 		"dark":   6,
@@ -55,8 +56,9 @@ var settings = {
 		"boxed":  lastVersion,
 		"coords": [[8,0],[9,0],[10,0]]},
 	"Mineral blocks": {
-		"solid":  7.3,
-		"framed": lastVersion,
+		"solid":    7.3,
+		"framed":   8.4,
+		"bevelled": lastVersion,
 		"coords": [[6,1],[7,1],[8,1],[0,9]]},
 	"Obsidian": {
 		"firey": 6,
@@ -72,7 +74,8 @@ var settings = {
 		"smooth":    7.2,
 		"patterned": 7.3,
 		"smoother":  7.4,
-		"3d":        lastVersion,
+		"3d":        8.4,
+		"pastel":    lastVersion,
 		"coords": [[0,4],
 			[1,7],[1,8],[1,9],[1,10],[1,11],[1,12],[1,13],[1,14],
 			[2,7],[2,8],[2,9],[2,10],[2,11],[2,12],[2,13]]},
@@ -105,8 +108,9 @@ var settings = {
 		"sparse":  lastVersion,
 		"coords": [[3,5]]},
 	"Trapdoor": {
-		"solid":  lastVersion,
-		"grate": "alt",
+		"solid":      8.4,
+		"reinforced": lastVersion,
+		"grate":      "alt",
 		"coords": [[4,5]]},
 	"Glass": {
 		"light frame": 6,
@@ -152,7 +156,7 @@ var settings = {
 		"lit":         7.4,
 		"offset jack": 8.3,
 		"round":       lastVersion,
-		"creeper": "alt",
+		"creeper":     "alt",
 		"coords": [[6,6],[6,7],[7,7],[8,7]]},
 	"Shrubs & Saplings": {
 		"leafy": 7.4,
@@ -183,9 +187,10 @@ var settings = {
 		"tiled":     lastVersion,
 		"coords": [[12,2],[13,2],[14,2],[13,3],[14,3]]},
 	"Jukebox": {
-		"wooden":  7.2,
-		"iron":    7.4,
-		"remixed": lastVersion,
+		"wooden":   7.2,
+		"iron":     7.4,
+		"remixed":  8.4,
+		"end":      lastVersion,
 		"coords": [[10,4],[11,4]]},
 	"Break Animation": {
 		"curly":    3,
@@ -203,17 +208,12 @@ var settings = {
 		"white": "alt",
 		"coords": [[11,0]]},
 	
-	//this setting is used to specify overrides. textures are sawpped with it immidiately after initial painting
+	//this setting is used to specify overrides. textures are swapped with it immidiately after initial painting
 	"override": {
 		"pack": "alt",
 		"coords": [
-			[3,8], [3,9],                    //repeater
-			[8,8], [9,8],                    //melon
-			[15,6], [15,7],                  //stems
-			[13,7], [14,7], [13,8],          //funghi
-			[10,8], [11,8], [10,9], [11,9],  //cauldron
-			[12,9], [13,9],                  //brewing stand
-			[14,9], [15,9], [14,10], [15,10] //whitestone, end portal
+			[3,8], [3,9],          //repeater
+			[13,7], [14,7], [13,8] //funghi
 		]}
 	//TODO (custom alternative): other break anims
 };
