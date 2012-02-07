@@ -219,7 +219,11 @@ var settings = {
 };
 
 var versions = {};
-for each (var setting in settings)
-	for each (var version in setting)
+for (var settingName in settings) {
+	var setting = settings[settingName];
+	for (var optionName in setting) {
+		var version = setting[optionName];
 		if (typeof version == "number" || typeof version == "string")
 			versions[version] = true;
+	}
+}
