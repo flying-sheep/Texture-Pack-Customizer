@@ -72,9 +72,14 @@ var settings = {
 			"black": lastVersion,
 			"coords": [[5,2]]},
 		"Nether": {
-			"low contrast":  6,
-			"high contrast": lastVersion,
+			"low contrast":   6,
+			"green soulsand": 8.1,
+			"high contrast":  lastVersion,
 			"coords": [[7,6],[8,6]]},
+		"Nether Brick": {
+			"big":   lastVersion,
+			"small": "alt",
+			"coords": [[0,14]]},
 		"Wool": {
 			"rough":     6,
 			"stitched":  7.1,
@@ -227,8 +232,11 @@ var settings = {
 };
 
 var versions = {};
-for each (var file in settings)
-	for each (var setting in file)
-		for each (var version in setting)
-			if (typeof version == "number" || typeof version == "string")
+for (var settingName in settings) {
+	var setting = settings[settingName];
+	for (var optionName in setting) {
+		var version = setting[optionName];
+		if (typeof version == "number" || typeof version == "string")
 			versions[version] = true;
+	}
+}
