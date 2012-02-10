@@ -65,9 +65,14 @@ var settings = {
 		"black": lastVersion,
 		"coords": [[5,2]]},
 	"Nether": {
-		"low contrast":  6,
-		"high contrast": lastVersion,
+		"low contrast":   6,
+		"green soulsand": 8.1,
+		"high contrast":  lastVersion,
 		"coords": [[7,6],[8,6]]},
+	"Nether Brick": {
+		"big":   lastVersion,
+		"small": "alt",
+		"coords": [[0,14]]},
 	"Wool": {
 		"rough":     6,
 		"stitched":  7.1,
