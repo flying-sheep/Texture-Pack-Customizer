@@ -1,4 +1,4 @@
-var lastVersion = 9;
+var lastVersion = 9.2;
 
 var settings = {
 	"mob": {
@@ -22,6 +22,7 @@ var settings = {
 			"light":       7.3,
 			"cobble":      7.4,
 			"big":         8.4,
+			"raw diamond": 9,
 			"big diamond": lastVersion,
 			"coords": [[1,0], [0,2], [1,2], [2,2], [2,3], [3,3], [0,10]]},
 		"Cobble & Moss": {
@@ -63,9 +64,10 @@ var settings = {
 			"boxed":  lastVersion,
 			"coords": [[8,0],[9,0],[10,0]]},
 		"Mineral blocks": {
-			"solid":    7.3,
-			"framed":   8.4,
-			"bevelled": lastVersion,
+			"solid":        7.3,
+			"framed":       8.4,
+			"bevelled":     9,
+			"lapis bricks": lastVersion,
 			"coords": [[6,1],[7,1],[8,1],[0,9]]},
 		"Obsidian": {
 			"firey": 6,
@@ -140,7 +142,8 @@ var settings = {
 			"grate":      7.3,
 			"mini grate": 7.4,
 			"pale":       8.1,
-			"lantern":    lastVersion,
+			"lantern":    9,
+			"lamp":       lastVersion,
 			"wood frame": "alt",
 			"coords": [[9,6]]},
 		"Wheat": {
