@@ -1,5 +1,8 @@
 var debug = false;
 
+//compatibility for new format
+var settings = settings["terrain.png"];
+
 //INITIALIZATION
 var urlSettings = {
 	"changedSettings": {},
