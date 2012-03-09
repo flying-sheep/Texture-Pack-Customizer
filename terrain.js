@@ -70,9 +70,13 @@ var settings = {
 			"lapis bricks": lastVersion,
 			"coords": [[6,1],[7,1],[8,1],[0,9]]},
 		"Obsidian": {
-			"firey": 6,
+			"firey": "alt",
 			"black": lastVersion,
-			"coords": [[5,2]]},
+			"coords": [[5,2],[6,10],[6,11],[7,11]]},
+		"Dragon egg": {
+			"organic": "alt",
+			"obsidian": lastVersion,
+			"coords": [[7,10]]},
 		"Nether": {
 			"low contrast":   6,
 			"green soulsand": 8.1,
@@ -207,6 +211,10 @@ var settings = {
 			"remixed":  8.4,
 			"end":      lastVersion,
 			"coords": [[10,4],[11,4]]},
+		"End Stone & Portal": {
+			"cheese": "alt",
+			"black":  lastVersion,
+			"coords": [[14,9],[15,9],[14,10],[15,10]]},
 		"Break Animation": {
 			"curly":    3,
 			"bashed":   4.1,
