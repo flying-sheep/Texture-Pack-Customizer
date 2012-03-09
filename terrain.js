@@ -217,7 +217,7 @@ var settings = {
 			"coords": [[14,9],[15,9],[14,10],[15,10]]},
 		"Break Animation": {
 			"curly":    3,
-			"bashed":   4.1,
+			"bashed":   "alt",
 			"straight": lastVersion,
 			"coords": [[0,15],[1,15],[2,15],[3,15],[4,15],[5,15],[6,15],[7,15],[8,15],[9,15]]},
 		"Bed": {
