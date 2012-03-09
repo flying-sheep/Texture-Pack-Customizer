@@ -22,6 +22,7 @@ pre > code {
 }
 form {
   min-width: 512px;
+/* this actually makes it adapt to its floating content’s size */
   overflow: hidden;
   padding-bottom: 3em;
 }
@@ -50,32 +51,29 @@ label {
 select {
   color: buttontext;
 }
-.ui-tabs .ui-tabs-hide {
-  display: none;
-}
-.ui-tabs .ui-tabs-nav {
+.tab-container {
   background-color: #000;
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
-.ui-tabs .ui-tabs-nav li {
+.tab-container li {
   list-style: none;
   float: left;
 }
-.ui-tabs .ui-tabs-nav li a:link {
+.tab-container li a:link {
   display: block;
   padding: 0.5em 1em;
   text-decoration: none;
   color: #fff;
 }
-.ui-tabs .ui-tabs-nav li a:link:focus {
+.tab-container li a:link:focus {
   outline: none;
 }
-.ui-tabs .ui-tabs-nav li.ui-tabs-selected {
+.tab-container li.active {
   background-color: #fff;
 }
-.ui-tabs .ui-tabs-nav li.ui-tabs-selected a:link {
+.tab-container li.active a:link {
   cursor: text;
   color: #000;
 }
@@ -116,7 +114,7 @@ a:visited:hover {
   display: table;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0,0,0,0.30);
 }
 #overlay > div {
   display: table-cell;
@@ -134,7 +132,7 @@ a:visited:hover {
   top: 0;
   right: 0;
   background-color: rgba(255,255,255,0.75);
-  border: solid rgba(0,0,0,0.6);
+  border: solid rgba(0,0,0,0.60);
   border-width: 0 0 1px 1px;
   border-radius: 1em;
   border-top-right-radius: 0;
@@ -149,6 +147,7 @@ a:visited:hover {
 #versions {
   display: none;
 }
+/* debug */
 h1 {
   clear: left;
 }

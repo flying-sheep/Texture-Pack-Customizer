@@ -53,35 +53,31 @@ label
 select
 	color buttontext
 
-.ui-tabs
-	.ui-tabs-hide
-		display none
+.tab-container
+	background-color black
+	margin 0
+	padding 0
+	overflow hidden
 	
-	.ui-tabs-nav
-		background-color black
-		margin 0
-		padding 0
-		overflow hidden
+	li
+		list-style none
+		float left
 		
-		li
-			list-style none
-			float left
+		a:link
+			display block
+			padding .5em 1em
+			text-decoration none
+			color white
+			
+			&:focus
+				outline none
+		
+		&.active
+			background-color white
 			
 			a:link
-				display block
-				padding .5em 1em
-				text-decoration none
-				color white
-				
-				&:focus
-					outline none
-			
-			&.ui-tabs-selected
-				background-color white
-				
-				a:link
-					cursor text
-					color black
+				cursor text
+				color black
 
 header, footer
 	display block
