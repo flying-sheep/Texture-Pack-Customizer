@@ -61,11 +61,38 @@ select {
   list-style: none;
   float: left;
 }
-.tab-container li a:link {
-  display: block;
-  padding: 0.5em 1em;
-  text-decoration: none;
+.tab-container li button {
   color: #fff;
+  padding: 0.3em 0.8em;
+  margin: 0.2em;
+  border: 0;
+  background: none #008000;
+  font: inherit;
+  font-weight: bold;
+  box-shadow: 0 0 0 0.2em #008000;
+  cursor: pointer;
+  -webkit-transition-property: box-shadow;
+  -moz-transition-property: box-shadow;
+  transition-property: box-shadow;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+.tab-container li button:hover {
+  box-shadow: 0 0 0.2em 0.2em #008000;
+}
+.tab-container li button:hover:active {
+  box-shadow: none;
+}
+.tab-container li button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.tab-container li a:link {
+  color: #fff;
+  padding: 0.5em 1em;
+  display: block;
+  text-decoration: none;
 }
 .tab-container li a:link:focus {
   outline: none;

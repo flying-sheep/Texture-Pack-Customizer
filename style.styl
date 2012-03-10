@@ -3,6 +3,16 @@ column-width(length)
 	-moz-column-width    length
 	column-width         length
 
+transition-property()
+	-webkit-transition-property arguments
+	-moz-transition-property    arguments
+	transition-property         arguments
+
+transition-duration()
+	-webkit-transition-duration arguments
+	-moz-transition-duration    arguments
+	transition-duration         arguments
+
 html, body
 	margin 0
 	padding 0
@@ -63,11 +73,34 @@ select
 		list-style none
 		float left
 		
-		a:link
-			display block
-			padding .5em 1em
-			text-decoration none
+		button
 			color white
+			padding .3em .8em
+			margin .2em
+			border 0
+			background none green
+			font inherit
+			font-weight bold
+			box-shadow 0 0 0 .2em green
+			cursor pointer
+			transition-property box-shadow
+			transition-duration .5s
+			
+			&:hover
+				box-shadow 0 0 .2em .2em green
+			
+			&:hover:active
+				box-shadow none
+			
+			&::-moz-focus-inner
+				border 0
+				padding 0
+		
+		a:link
+			color white
+			padding .5em 1em
+			display block
+			text-decoration none
 			
 			&:focus
 				outline none
