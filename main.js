@@ -87,21 +87,26 @@ function download() {
 		zip.file(sheetName, dataURI.substr(dataURI.indexOf(",")+1), { base64: true });
 	}
 	
-	overlay.hide();
-	content = zip.generate({ base64: false });
-	var ab = new ArrayBuffer(content.length);
-	var ia = new Uint8Array(ab);
-	for (var c=0; c<content.length; c++)
-		ia[c] = content.charCodeAt(c);
-	
-	var BlobBuilder = (window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder);
-	var bb = new BlobBuilder();
-	bb.append(ab);
 	
 	var URL = (window.URL || window.webkitURL);
-	if (downloadURL)
-		URL.revokeObjectURL(downloadURL);
-	downloadURL = URL.createObjectURL(bb.getBlob("application-zip"));
+	if (URL) {
+		var content = zip.generate({ base64: false });
+		var ab = new ArrayBuffer(content.length);
+		var ia = new Uint8Array(ab);
+		for (var c=0; c<content.length; c++)
+			ia[c] = content.charCodeAt(c);
+		
+		var BlobBuilder = (window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder);
+		var bb = new BlobBuilder();
+		bb.append(ab);
+		
+		if (downloadURL)
+			URL.revokeObjectURL(downloadURL);
+		downloadURL = URL.createObjectURL(bb.getBlob("application/zip"));
+	} else
+		downloadURL = "data:application/zip;base64," + zip.generate();
+	
+	overlay.hide();
 	location.href = downloadURL;
 }
 
