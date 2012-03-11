@@ -68,6 +68,43 @@ var util = {
 	}
 }
 
+var downloadURL;
+
+function download() {
+	var zip;
+	overlay.show();
+	
+	$.ajax({
+		url: util.packUrl(lastVersion),
+		async: false,
+		success: function(data) { zip = new JSZip(data); }
+	});
+	
+	for (var sheetName in settings) {
+		if (sheetName == "mob") continue;
+		
+		var dataURI = util.getCanvas(sheetName).getCanvasImage();
+		zip.file(sheetName, dataURI.substr(dataURI.indexOf(",")+1), { base64: true });
+	}
+	
+	overlay.hide();
+	content = zip.generate({ base64: false });
+	var ab = new ArrayBuffer(content.length);
+	var ia = new Uint8Array(ab);
+	for (var c=0; c<content.length; c++)
+		ia[c] = content.charCodeAt(c);
+	
+	var BlobBuilder = (window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder);
+	var bb = new BlobBuilder();
+	bb.append(ab);
+	
+	var URL = (window.URL || window.webkitURL);
+	if (downloadURL)
+		URL.revokeObjectURL(downloadURL);
+	downloadURL = URL.createObjectURL(bb.getBlob("application-zip"));
+	location.href = downloadURL;
+}
+
 var overlay = {
 	count: 0,
 	show: function() {
@@ -133,6 +170,7 @@ function swap(sheetName, settingName, optionName) {
 
 $(function() {
 	$("#settings").tabs();
+	$("#settings button").click(download);
 	
 	for (var sheetName in settings) {
 		if (sheetName == "mob") continue;
