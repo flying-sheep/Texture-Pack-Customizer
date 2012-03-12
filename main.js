@@ -62,7 +62,7 @@ var util = {
 			success: function(data) {
 				zips[version] = new JSZip(data);
 				overlay.hide();
-				callback();
+				callback(data);
 			}
 		});
 	}
@@ -71,26 +71,19 @@ var util = {
 var downloadURL;
 
 function download() {
-	var zip;
 	overlay.show();
-	
-	$.ajax({
-		url: util.packUrl(lastVersion),
-		async: false,
-		success: function(data) { zip = new JSZip(data); }
-	});
 	
 	for (var sheetName in settings) {
 		if (sheetName == "mob") continue;
 		
 		var dataURI = util.getCanvas(sheetName).getCanvasImage();
-		zip.file(sheetName, dataURI.substr(dataURI.indexOf(",")+1), { base64: true });
+		zips["custom"].file(sheetName, dataURI.substr(dataURI.indexOf(",")+1), { base64: true });
 	}
 	
 	
 	var URL = (window.URL || window.webkitURL);
 	if (URL) {
-		var content = zip.generate({ base64: false });
+		var content = zips["custom"].generate({ base64: false });
 		var ab = new ArrayBuffer(content.length);
 		var ia = new Uint8Array(ab);
 		for (var c=0; c<content.length; c++)
@@ -104,7 +97,7 @@ function download() {
 			URL.revokeObjectURL(downloadURL);
 		downloadURL = URL.createObjectURL(bb.getBlob("application/zip"));
 	} else
-		downloadURL = "data:application/zip;base64," + zip.generate();
+		downloadURL = "data:application/zip;base64," + zips["custom"].generate();
 	
 	overlay.hide();
 	location.href = downloadURL;
@@ -185,7 +178,8 @@ $(function() {
 			.attr("width",  512)
 			.attr("height", 512); //TODO
 		
-		util.loadPack(lastVersion, function() {
+		util.loadPack(lastVersion, function(data) {
+			zips["custom"] = new JSZip(data);
 			canvas.drawImage({
 				source: util.imgData(sheetName, lastVersion),
 				x: 256, y: 256,
