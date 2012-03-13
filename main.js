@@ -227,6 +227,7 @@ $(function() {
 	}
 	
 	$("#version").text(lastVersion);
+	$("select").yaselect();
 	blockToggle("versions");
 	blockToggle("guide");
 });

@@ -41,15 +41,27 @@ canvas {
   margin-bottom: 16px;
 }
 label,
-select {
-  width: 128px;
+select,
+.yaselect-anchor {
+  width: 126px;
+  display: inline-block;
 }
 label {
-  display: inline-block;
+  padding-right: 4px;
   text-align: right;
 }
-select {
-  color: buttontext;
+.yaselect-wrap {
+  background-color: #000;
+  color: #fff;
+  padding: 0 4px;
+  cursor: pointer;
+}
+.yaselect-current::after {
+  float: right;
+  content: "▾";
+}
+.yaselect-open .yaselect-current::after {
+  content: "▴";
 }
 .tab-container {
   background-color: #000;

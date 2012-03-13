@@ -10,3 +10,6 @@
 [submodule "lib/raphael"]
 	path = lib/raphael
 	url = https://github.com/DmitryBaranovskiy/raphael.git
+[submodule "lib/yaselect"]
+	path = lib/yaselect
+	url = https://github.com/choonkeat/yaselect.git
