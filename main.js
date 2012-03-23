@@ -36,7 +36,6 @@ var urlSettings = {
 urlSettings.fromUrl();
 
 $.ajaxSetup({
-	mimeType: "text/plain; charset=x-user-defined",
 	error: function(req, status, error) { console.error(error); }
 });
 
@@ -58,6 +57,7 @@ var util = {
 	loadPack: function(version, callback) {
 		overlay.show();
 		$.ajax({
+			mimeType: "text/plain; charset=x-user-defined",
 			url: util.packUrl(version),
 			success: function(data) {
 				zips[version] = new JSZip(data);
