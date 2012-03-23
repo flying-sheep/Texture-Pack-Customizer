@@ -186,6 +186,20 @@ a:visited:hover {
 #versions {
   display: none;
 }
+#versions > h1 {
+  margin: 0;
+}
+#versions > ul {
+  margin: 0;
+  padding: 0 1em;
+}
+#versions > ul > li.divider {
+  list-style: none;
+}
+#versions > ul > li.divider > hr {
+  border: none;
+  border-bottom: 1px solid #000;
+}
 /* debug */
 h1 {
   clear: left;
