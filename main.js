@@ -1,4 +1,5 @@
 var debug = false;
+var commitURL = "https://github.com/api/v2/json/commits/list/flying-sheep/Texture-Pack-Customizer/zip?callback=?";
 
 //INITIALIZATION
 var urlSettings = {
@@ -230,7 +231,30 @@ $(function() {
 	$("select").yaselect();
 	blockToggle("versions");
 	blockToggle("guide");
+	
+	loadCommitPage(1);
 });
+
+function loadCommitPage(p) {
+	var versionContainer = $("#versions > ul");
+	
+	$.getJSON(commitURL+"&page="+p, function(data) {
+		if (!data.error) {
+			if (p != 1)
+				$("<li><hr/></li>")
+					.addClass("divider")
+					.appendTo(versionContainer);
+			
+			data.commits.forEach(function(commit) {
+				$("<li/>")
+					.text(commit.message)
+					.appendTo(versionContainer);
+			});
+			
+			loadCommitPage(p+1);
+		}
+	});
+}
 
 function blockToggle(id) {
 	var inButton = $("#"+id+"_button");
