@@ -23,6 +23,7 @@ pre > code {
 form {
   min-width: 512px;
   padding: 16px;
+/* this actually makes it adapt to its floating content’s size */
   overflow: hidden;
   padding-bottom: 3em;
 }
@@ -38,15 +39,27 @@ canvas {
   float: left;
 }
 label,
-select {
-  width: 128px;
+select,
+.yaselect-anchor {
+  width: 126px;
+  display: inline-block;
 }
 label {
-  display: inline-block;
+  padding-right: 4px;
   text-align: right;
 }
-select {
-  color: buttontext;
+.yaselect-wrap {
+  background-color: #000;
+  color: #fff;
+  padding: 0 4px;
+  cursor: pointer;
+}
+.yaselect-current::after {
+  float: right;
+  content: "▾";
+}
+.yaselect-open .yaselect-current::after {
+  content: "▴";
 }
 header,
 footer {
@@ -86,7 +99,7 @@ footer a:visited:hover {
   top: 0;
   right: 0;
   background-color: rgba(255,255,255,0.75);
-  border: solid rgba(0,0,0,0.6);
+  border: solid rgba(0,0,0,0.60);
   border-width: 0 0 1px 1px;
   border-radius: 1em;
   border-top-right-radius: 0;
@@ -101,6 +114,21 @@ footer a:visited:hover {
 #versions {
   display: none;
 }
+#versions > h1 {
+  margin: 0;
+}
+#versions > ul {
+  margin: 0;
+  padding: 0 1em;
+}
+#versions > ul > li.divider {
+  list-style: none;
+}
+#versions > ul > li.divider > hr {
+  border: none;
+  border-bottom: 1px solid #000;
+}
+/* debug */
 h1 {
   clear: left;
 }

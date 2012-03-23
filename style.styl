@@ -40,15 +40,26 @@ form > div
 form > div, canvas
 	float left
 
-label, select
-	width 128px
+label, select, .yaselect-anchor
+	width 126px
+	display inline-block
 
 label
-	display inline-block
+	padding-right 4px
 	text-align right
 
-select
-	color buttontext
+.yaselect-wrap
+	background-color black
+	color white
+	padding 0 4px
+	cursor pointer
+
+.yaselect-current::after
+	float right
+	content "▾"
+
+.yaselect-open .yaselect-current::after
+	content "▴"
 
 header, footer
 	display block
@@ -97,6 +108,20 @@ footer a
 	opacity .6
 #versions
 	display none
+	
+	> h1
+		margin 0
+	
+	> ul
+		margin 0
+		padding 0 1em
+		
+		> li.divider
+			list-style none
+			
+			> hr
+				border none
+				border-bottom 1px solid black
 
 /* debug */
 h1
