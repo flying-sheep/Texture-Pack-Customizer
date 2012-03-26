@@ -1,4 +1,4 @@
-var lastVersion = 9.2;
+var lastVersion = 9.3;
 
 var settings = {
 	"mob": {
@@ -104,8 +104,13 @@ var settings = {
 		"Log": {
 			"round":    3,
 			"cornered": 7.4,
-			"dark":     lastVersion,
+			"dark":     9.2,
+			"smooth":   lastVersion,
 			"coords": [[4,1],[5,1]]},
+		"Jungle Log": {
+			"viney": 9.2,
+			"dark":  lastVersion,
+			"coords": [[9,9]]},
 		"Wooden door": {
 			"crude planks": 3,
 			"fancy window": 6,
