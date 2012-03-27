@@ -90,7 +90,7 @@ function download() {
 		for (var c=0; c<content.length; c++)
 			ia[c] = content.charCodeAt(c);
 		
-		var BlobBuilder = (window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder);
+		var BlobBuilder = (window.MSBlobBuilder || window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder);
 		var bb = new BlobBuilder();
 		bb.append(ab);
 		
