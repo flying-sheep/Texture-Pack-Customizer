@@ -1,5 +1,5 @@
 var debug = false;
-var commitURL = "https://github.com/api/v2/json/commits/list/flying-sheep/Texture-Pack-Customizer/zip?callback=?";
+var commitURL = "https://api.github.com/repos/flying-sheep/Texture-Pack-Customizer/commits?callback=?";
 
 //INITIALIZATION
 var urlSettings = {
@@ -239,15 +239,15 @@ function loadCommitPage(p) {
 	var versionContainer = $("#versions > ul");
 	
 	$.getJSON(commitURL+"&page="+p, function(data) {
-		if (!data.error) {
+		if (p == 1) { //TODO!
 			if (p != 1)
 				$("<li><hr/></li>")
 					.addClass("divider")
 					.appendTo(versionContainer);
 			
-			data.commits.forEach(function(commit) {
+			$(data.data).each(function(index, commit) {
 				$("<li/>")
-					.text(commit.message)
+					.text(commit.commit.message)
 					.appendTo(versionContainer);
 			});
 			
