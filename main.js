@@ -169,12 +169,10 @@ function swap(sheetName, settingName, optionName) {
 	else doSwap();
 }
 
-function selected(sheetName) {
-	return function(aEvt) {
-		var sel = aEvt.target;
-		var opt = sel.options[sel.selectedIndex].textContent;
-		swap(sheetName, sel.id, opt);
-	};
+function selected(aEvt) {
+	var sel = aEvt.target;
+	var opt = sel.options[sel.selectedIndex].textContent;
+	swap(aEvt.data.sheetName, sel.id, opt);
 }
 
 $(function() {
@@ -227,8 +225,8 @@ $(function() {
 					option.attr("selected", "selected");
 			}
 			
-			select.change(selected(sheetName));
-			select.keyup(selected(sheetName));
+			select.change({ sheetName: sheetName }, selected);
+			select.keyup({ sheetName: sheetName }, selected);
 		}
 	}
 	
