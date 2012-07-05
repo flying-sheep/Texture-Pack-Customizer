@@ -53,7 +53,7 @@ var util = {
 	packUrl: function(version) {
 		if (version.toFixed)
 			version = version.toFixed(1);
-		return "packs/johnsmith_v"+version+".zip";
+		return "packs/JohnSmith_V"+version+".zip";
 	},
 	loadPack: function(version, callback) {
 		overlay.show();
