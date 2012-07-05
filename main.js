@@ -204,11 +204,11 @@ $(function() {
 			
 			setting = sheet[settingName];
 			
-			var select = $("<select/>", {id: settingName})
+			var select = $("<select/>", { id: settingName })
 				.appendTo(
 					$("<div/>")
 						.append(
-							$("<label/>", {for: settingName})
+							$("<label/>", { for: settingName })
 								.text(settingName)
 						)
 						.appendTo(canvas.parent())
