@@ -1,3 +1,5 @@
+"use strict";
+
 var debug = false;
 var commitURL = "https://api.github.com/repos/flying-sheep/Texture-Pack-Customizer/commits?callback=?";
 
@@ -15,13 +17,13 @@ var urlSettings = {
 	},
 	toUrl: function() {
 		var hash = [];
-		for (settingName in urlSettings.changedSettings)
+		for (var settingName in urlSettings.changedSettings)
 			if (settingName != "override")
 				hash.push(settingName + "=" + urlSettings.changedSettings[settingName]);
 		location.replace("#" + hash.join("&&"));
 	},
 	apply: function() {
-		for (settingName in urlSettings.changedSettings)
+		for (var settingName in urlSettings.changedSettings)
 			swap(settingName, urlSettings.changedSettings[settingName]);
 	},
 	set: function(settingName, optionName) {
@@ -32,7 +34,7 @@ var urlSettings = {
 		else
 			delete urlSettings.changedSettings[settingName];
 	}
-}
+};
 
 urlSettings.fromUrl();
 
@@ -44,7 +46,7 @@ var zips = {};
 
 var util = {
 	getCanvas: function(sheetName) {
-		return $("#" + sheetName.replace(".png",""))
+		return $("#" + sheetName.replace(".png",""));
 	},
 	imgData: function(sheetName, version) {
 		var data = "data:image/png;base64,";
@@ -67,7 +69,7 @@ var util = {
 			}
 		});
 	}
-}
+};
 
 var downloadURL;
 
@@ -107,7 +109,7 @@ function download() {
 var overlay = {
 	count: 0,
 	show: function() {
-		if (overlay.count++ == 0) {
+		if (overlay.count++ === 0) {
 			overlay.overlay = $("<div/>")
 				.attr("id", "overlay")
 				.appendTo("body")
@@ -123,7 +125,7 @@ var overlay = {
 		}
 	},
 	hide: function() {
-		if (--overlay.count == 0)
+		if (--overlay.count === 0)
 			overlay.overlay.remove();
 	}
 };
@@ -165,6 +167,14 @@ function swap(sheetName, settingName, optionName) {
 	if (!zips[version])
 		util.loadPack(version, doSwap);
 	else doSwap();
+}
+
+function selected(sheetName) {
+	return function(aEvt) {
+		var sel = aEvt.target;
+		var opt = sel.options[sel.selectedIndex].textContent;
+		swap(sheetName, sel.id, opt);
+	};
 }
 
 $(function() {
@@ -217,13 +227,8 @@ $(function() {
 					option.attr("selected", "selected");
 			}
 			
-			function selected(aEvt) {
-				var sel  = aEvt.target;
-				var opt  = sel.options[sel.selectedIndex].textContent;
-				swap(sheetName, sel.id, opt);
-			}
-			select.change(selected);
-			select.keyup(selected);
+			select.change(selected(sheetName));
+			select.keyup(selected(sheetName));
 		}
 	}
 	
@@ -262,7 +267,7 @@ function blockToggle(id) {
 	
 	var outButton = inButton.prev("button");
 	
-	if (outButton.length == 0) {
+	if (outButton.length === 0) {
 		outButton = $("<button/>")
 			.text("×")
 			.css({
