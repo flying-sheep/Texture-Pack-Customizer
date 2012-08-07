@@ -8,7 +8,7 @@ from zipfile import ZipFile
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-zip_re = re.compile(r"johnsmith_v(\d.\d\w?).zip")
+zip_re = re.compile(r"JohnSmith_V(\d.\d\w?).zip")
 
 colors = {QColor.fromRgb(*rgb).rgb() for rgb in (
 	(65,76,79),
