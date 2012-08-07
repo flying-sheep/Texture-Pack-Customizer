@@ -1,4 +1,4 @@
-var lastVersion = 9.3;
+var lastVersion = 9.5;
 
 var settings = {
 	"mob": {
@@ -57,7 +57,8 @@ var settings = {
 			"mortarless": 7,
 			"mortar":     7.3,
 			"3d":         7.4,
-			"rough":      lastVersion,
+			"rough":      9.3,
+			"fine":       lastVersion,
 			"coords": [[7,0]]},
 		"TNT": {
 			"sticks": 6,
@@ -73,6 +74,12 @@ var settings = {
 			"firey": "alt",
 			"black": lastVersion,
 			"coords": [[5,2],[6,10],[6,11],[7,11]]},
+		"Snow & Ice": {
+			"scratched":  4.1,
+			"glittering": 7.2,
+			"glossy":     9.3,
+			"glacier":    lastVersion,
+			"coords": [[2,4],[3,4]]},
 		"Dragon egg": {
 			"organic": "alt",
 			"obsidian": lastVersion,
@@ -93,7 +100,8 @@ var settings = {
 			"patterned": 7.3,
 			"smoother":  7.4,
 			"3d":        8.4,
-			"pastel":    lastVersion,
+			"pastel":    9.3,
+			"fuzzy":     lastVersion,
 			"coords": [[0,4],
 				[1,7],[1,8],[1,9],[1,10],[1,11],[1,12],[1,13],[1,14],
 				[2,7],[2,8],[2,9],[2,10],[2,11],[2,12],[2,13]]},
