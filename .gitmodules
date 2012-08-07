@@ -1,15 +1,15 @@
 [submodule "lib/jszip"]
 	path = lib/jszip
-	url = https://github.com/dduponchel/jszip.git
+	url = git://github.com/Stuk/jszip.git
 [submodule "lib/jcanvas"]
 	path = lib/jcanvas
-	url = https://github.com/caleb531/jcanvas.git
+	url = git://github.com/caleb531/jcanvas.git
 [submodule "lib/jquery.raphael.spinner"]
 	path = lib/jquery.raphael.spinner
-	url = https://github.com/hunterae/jquery.raphael.spinner.git
+	url = git://github.com/hunterae/jquery.raphael.spinner.git
 [submodule "lib/raphael"]
 	path = lib/raphael
-	url = https://github.com/DmitryBaranovskiy/raphael.git
+	url = git://github.com/DmitryBaranovskiy/raphael.git
 [submodule "lib/yaselect"]
 	path = lib/yaselect
-	url = https://github.com/choonkeat/yaselect.git
+	url = git://github.com/choonkeat/yaselect.git
