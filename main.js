@@ -1,7 +1,7 @@
 "use strict";
 
 var debug = false;
-var commitURL = "https://api.github.com/repos/flying-sheep/Texture-Pack-Customizer/commits?callback=?";
+var commitURL = "https://api.github.com/repos/flying-sheep/Texture-Pack-Customizer/commits?sha=zip&callback=?";
 
 //INITIALIZATION
 var urlSettings = {
@@ -235,27 +235,35 @@ $(function() {
 	blockToggle("versions");
 	blockToggle("guide");
 	
-	loadCommitPage(1);
+	loadCommitPage();
 });
 
-function loadCommitPage(p) {
+function loadCommitPage() {
 	var versionContainer = $("#versions > ul");
 	
-	$.getJSON(commitURL+"&page="+p, function(data) {
-		if (p == 1) { //TODO!
-			if (p != 1)
-				$("<li><hr/></li>")
-					.addClass("divider")
-					.appendTo(versionContainer);
-			
-			$(data.data).each(function(index, commit) {
-				$("<li/>")
-					.text(commit.commit.message)
-					.appendTo(versionContainer);
-			});
-			
-			loadCommitPage(p+1);
-		}
+	$.getJSON(commitURL, function(data) {
+		if (commitURL.indexOf("page") === -1)
+			$("<li><hr/></li>")
+				.addClass("divider")
+				.appendTo(versionContainer);
+		
+		$(data.data).each(function(index, commit) {
+			$("<li/>")
+				.text(commit.commit.message)
+				.appendTo(versionContainer);
+		});
+		
+		var next = false;
+		
+		$(data.meta.Link).each(function(i, link) {
+			if (link[1].rel == "next") {
+				commitURL = link[0].replace(/callback=[^&]+/, "callback=?");
+				next = true;
+			}
+		});
+		
+		if (next)
+			loadCommitPage();
 	});
 }
 
