@@ -117,8 +117,30 @@ $(document).ready(function() {
 	}
 });
 
+var downloadURL;
+
 //HELPER FUNCTIONS
-function saveCanvas() {Canvas2Image.saveAsPNG($("#terrain")[0])}
+function saveCanvas() {
+	var URL = (window.URL || window.webkitURL);
+	var canvas = $("#terrain")[0];
+	
+	if (URL && canvas.toBlob || canvas.mozGetAsFile) {
+		if (downloadURL)
+			URL.revokeObjectURL(downloadURL);
+		if (canvas.toBlob)
+			downloadURL = URL.createObjectURL(canvas.toBlob());
+		else
+			downloadURL = URL.createObjectURL(canvas.mozGetAsFile("terrain.png"));
+	} else
+		downloadURL = canvas.toDataURL("image/png");
+	
+	var evt = document.createEvent("MouseEvents");
+	evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+	$("<a/>", {
+		download: "terrain.png",
+		href: downloadURL
+	})[0].dispatchEvent(evt);
+}
 function imgPath(name) {return "terrain.png/"+name+".png"}
 
 function swap(settingName, optionName) {
