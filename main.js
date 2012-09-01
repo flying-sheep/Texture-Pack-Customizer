@@ -83,7 +83,6 @@ function download() {
 		zips["custom"].file(sheetName, dataURI.substr(dataURI.indexOf(",")+1), { base64: true });
 	}
 	
-	
 	var URL = (window.URL || window.webkitURL);
 	if (URL) {
 		var content = zips["custom"].generate({ base64: false });
@@ -103,7 +102,13 @@ function download() {
 		downloadURL = "data:application/zip;base64," + zips["custom"].generate();
 	
 	overlay.hide();
-	location.href = downloadURL;
+	
+	var evt = document.createEvent("MouseEvents");
+	evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+	$("<a/>", {
+		download: "JohnSmith_V"+lastVersion+"_alt.zip",
+		href: downloadURL
+	}).get(0).dispatchEvent(evt);
 }
 
 var overlay = {
