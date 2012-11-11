@@ -1,4 +1,4 @@
-var lastVersion = 9.5;
+var lastVersion = 9.7;
 
 var settings = {
 	"mob": {
@@ -68,7 +68,8 @@ var settings = {
 			"solid":        7.3,
 			"framed":       8.4,
 			"bevelled":     9,
-			"lapis bricks": lastVersion,
+			"lapis bricks": 9.6,
+			"gold bricks":  lastVersion,
 			"coords": [[6,1],[7,1],[8,1],[0,9]]},
 		"Obsidian": {
 			"firey": "alt",
@@ -101,7 +102,8 @@ var settings = {
 			"smoother":  7.4,
 			"3d":        8.4,
 			"pastel":    9.3,
-			"fuzzy":     lastVersion,
+			"fuzzy":     9.5,
+			"framed":    lastVersion,
 			"coords": [[0,4],
 				[1,7],[1,8],[1,9],[1,10],[1,11],[1,12],[1,13],[1,14],
 				[2,7],[2,8],[2,9],[2,10],[2,11],[2,12],[2,13]]},
@@ -160,9 +162,14 @@ var settings = {
 			"mini grate": 7.4,
 			"pale":       8.1,
 			"lantern":    9,
-			"lamp":       lastVersion,
+			"lamp":       9.6,
+			"diamond":    lastVersion,
 			"wood frame": "alt",
 			"coords": [[9,6]]},
+		"Lantern": {
+			"lamp":    9.6,
+			"diamond": lastVersion,
+			"coords": [[3,13],[4,13]]},
 		"Wheat": {
 			"chaotic":  6,
 			"upright":  7.4,
